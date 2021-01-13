@@ -20,10 +20,8 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Idx_Admin;
 
-    @Column(name = "Email")
-    private String Email;
-
-    @Column(name = "Password")
-    private String Password;
+    private String name;
+    private String email;
+    private String password;
 
 }
