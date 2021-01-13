@@ -2,6 +2,7 @@ package com.helpme.MembershipFee.service;
 
 import com.helpme.MembershipFee.domain.members.Member;
 import com.helpme.MembershipFee.domain.members.MemberRepository;
+import com.helpme.MembershipFee.web.dto.MemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,17 @@ public class MemberService {
         return err;
     }
 
+    @Transactional
+    public Member findByEmail(MemberLoginRequestDto memberLoginRequestDto) throws Exception {
+        Member member = memberRepository.findByEmail(memberLoginRequestDto.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("아이디 틀림"));
 
+        System.out.println(memberLoginRequestDto.getPassword());
+        System.out.println(member.getPassword());
 
-
+        if(!memberLoginRequestDto.getPassword().equals(member.getPassword())) {
+            throw new Exception ("비밀번호가 틀립니다.");
+        }
+        return member;
+    }
 }
