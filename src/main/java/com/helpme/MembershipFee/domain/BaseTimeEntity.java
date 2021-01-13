@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.domains.common.domain;
+package com.helpme.MembershipFee.domain;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

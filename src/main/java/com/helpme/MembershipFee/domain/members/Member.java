@@ -1,6 +1,6 @@
-package com.helpme.MembershipFee.domains.member.domain;
+package com.helpme.MembershipFee.domain.members;
 
-import com.helpme.MembershipFee.domains.common.domain.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
