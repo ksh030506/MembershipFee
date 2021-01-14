@@ -46,6 +46,7 @@ public class AdministratorMemberController {
     @ResponseBody
     @PostMapping("/signin")
     public Map<String, String> loginUser(@RequestBody AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto, HttpServletRequest req, HttpServletResponse res) throws Exception {
+        //Json으로 보내기 위해 사용
         Map<String, String> map = new HashMap<>();
         try {
             final AdministratorMember member = administratorMemberService.findByEmail(administratorMemberLoginRequestDto);

@@ -14,13 +14,19 @@ import javax.persistence.*;
 @Entity
 public class Member extends BaseTimeEntity {
 
+    //비즈니스 로직에 포함되지 않은 PK
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Idx_Member;
 
+    //유저 이름
     private String membername;
+    //유저 생일
     private String birth;
 
+    //어떤 관리자가 추가했는지 알 수 있는 FK
+    //LAZY => 지연로딩
+    //Table 설계 X, 객체지향적 설계 O
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idx_Admin")
     private AdministratorMember administratorMember;
