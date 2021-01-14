@@ -6,8 +6,8 @@ import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.common.RedisUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.service.AdministratorMemberService;
-import com.helpme.MembershipFee.web.dto.MemberLoginRequestDto;
-import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
+import com.helpme.MembershipFee.web.dto.AdministratorMemberLoginRequestDto;
+import com.helpme.MembershipFee.web.dto.AdministratorMemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,10 +36,10 @@ public class AdministratorMemberController {
 
 
     @PostMapping("/signup")
-    public String signUpUser(@RequestBody MemberSaveRequestDto memberSaveRequestDto) throws Exception {
+    public String signUpUser(@RequestBody AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         JsonObject obj = new JsonObject();
         try {
-            administratorMemberService.save(memberSaveRequestDto);
+            administratorMemberService.save(administratorMemberSaveRequestDto);
             obj.addProperty("msg", "회원가입 성공");
         } catch (Exception e){
             System.out.println(e);
@@ -49,19 +49,13 @@ public class AdministratorMemberController {
     }
 
     @PostMapping("/signin")
-    public String loginUser(@RequestBody MemberLoginRequestDto memberLoginRequestDto, HttpServletRequest req, HttpServletResponse res) throws Exception {
+    public String loginUser(@RequestBody AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto, HttpServletRequest req, HttpServletResponse res) throws Exception {
         JsonObject obj = new JsonObject();
         try {
-            final AdministratorMember member = administratorMemberService.findByEmail(memberLoginRequestDto);
+            final AdministratorMember member = administratorMemberService.findByEmail(administratorMemberLoginRequestDto);
             final String token = jwtUtil.generateToken(member);
-            final  String refreshJwt = jwtUtil.generateRefreshToken(member);
-
             Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token);
-            Cookie refreshToken = cookieUtil.createCookie(JwtUtil.REFRESH_TOKEN_NAME, refreshJwt);
-            redisUtil.setDataExpire(refreshJwt, member.getEmail(), JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
-
             res.addCookie(accessToken);
-            res.addCookie(refreshToken);
 
             obj.addProperty("msg", "로그인 성공");
             obj.addProperty("email", member.getEmail());
