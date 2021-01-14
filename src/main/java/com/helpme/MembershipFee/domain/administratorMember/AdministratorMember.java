@@ -16,7 +16,7 @@ public class AdministratorMember extends BaseTimeEntity {
 
     //비즈니스 로직에 포함되지 않은 PK
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Idx_Admin;
 
     //관리자 이름
