@@ -3,10 +3,8 @@ package com.helpme.MembershipFee.domain.member;
 import com.helpme.MembershipFee.common.BaseTimeEntity;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

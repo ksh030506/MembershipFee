@@ -1,6 +1,5 @@
 package com.helpme.MembershipFee.service;
 
-import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
@@ -25,32 +24,29 @@ public class MemberService {
     private AdministratorMemberRepository administratorMemberRepository;
 
     @Autowired
-    private CookieUtil cookieUtil;
-
-    @Autowired
     private JwtUtil jwtUtil;
 
     @Transactional
-    public void save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
-        final String token = req.getHeader("userEmail");
+    public Long save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
+        final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
+        //AdminIdx 저장을 위한 관리자 불러오기
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         Member member = Member.builder()
                 .membername(memberSaveRequestDto.getMembername())
                 .birth(memberSaveRequestDto.getBirth())
                 .administratorMember(administratorMember)
                 .build();
-
-        if(jwtUtil.validateToken(token, administratorMember) == true) {
-            if(CheckName(memberSaveRequestDto.getMembername()) == false){
-                res.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = res.getWriter();
-                out.println("<script>alert('이름이 중복되었습니다.'); history.go(-1);</script>");
-                out.flush();
-            } else {
-                memberRepository.save(member);
-            }
+        if(!CheckName(memberSaveRequestDto.getMembername())){
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('이름이 중복되었습니다.'); history.go(-1);</script>");
+            out.flush();
         }
+        if (!jwtUtil.validateToken(token, administratorMember)) {
+            throw new Exception("회원 인증 실패");
+        }
+        return memberRepository.save(member).getIdx_Member();
     }
 
     public Boolean CheckName(String name){

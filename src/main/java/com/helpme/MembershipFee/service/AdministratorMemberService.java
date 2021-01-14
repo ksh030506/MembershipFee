@@ -21,21 +21,22 @@ public class AdministratorMemberService {
     private AdministratorMemberRepository administratorMemberRepository;
 
     @Transactional
-    public void save(AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
-        if(checkEmail(administratorMemberSaveRequestDto.getEmail()) == false){
+    public Long save(AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
+        if(!checkEmail(administratorMemberSaveRequestDto.getEmail())){
             throw new Exception("이메일 중복");
-        } else if(isValidEmail(administratorMemberSaveRequestDto.getEmail()) == false){
+        } else if(!isValidEmail(administratorMemberSaveRequestDto.getEmail())){
             throw new Exception("이메일 형식을 지켜주세요");
-        } else if(checkName(administratorMemberSaveRequestDto.getName()) == false){
+        } else if(!checkName(administratorMemberSaveRequestDto.getName())){
             throw new Exception("이름 중복");
         }
+        //비밀번호 암호화
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         String newPassword1 = passwordEncoder.encode(administratorMemberSaveRequestDto.getPassword());
-        System.out.println(newPassword1);
         administratorMemberSaveRequestDto.setPassword(newPassword1);
-        administratorMemberRepository.save(administratorMemberSaveRequestDto.toEntity());
+        return administratorMemberRepository.save(administratorMemberSaveRequestDto.toEntity()).getIdx_Admin();
     }
 
+    //이메일 중복 검사
     public Boolean checkEmail(String email){
         AdministratorMember member = administratorMemberRepository.findByEmail(email);
         if(member == null){
@@ -44,6 +45,7 @@ public class AdministratorMemberService {
         return false;
     }
 
+    //이름 중복 검사
     public Boolean checkName(String name){
         Optional<AdministratorMember> member = administratorMemberRepository.findByName(name);
         if(member.isEmpty()){
@@ -52,7 +54,8 @@ public class AdministratorMemberService {
         return false;
     }
 
-    public static boolean isValidEmail(String email) {
+    //이메일 형식 검사
+    public boolean isValidEmail(String email) {
         boolean err = false;
         String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
         Pattern p = Pattern.compile(regex);
@@ -67,10 +70,10 @@ public class AdministratorMemberService {
     public AdministratorMember findByEmail(AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto) throws Exception {
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         AdministratorMember member = administratorMemberRepository.findByEmail(administratorMemberLoginRequestDto.getEmail());
-
         if(member == null){
             throw new Exception ("아이디가 없음");
         }
+        //저장되어 있는 암호화 비밀번호와 Request한 비밀번호를 PasswordEncoder로 비교
         if(passwordEncoder.matches(administratorMemberLoginRequestDto.getPassword(), member.getPassword()) == false){
             throw new Exception ("비밀번호가 틀립니다.");
         }
