@@ -1,19 +1,18 @@
 package com.helpme.MembershipFee.domain.member;
 
-import com.helpme.MembershipFee.domain.BaseTimeEntity;
+import com.helpme.MembershipFee.common.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class Member extends BaseTimeEntity {
 
@@ -21,7 +20,11 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Idx_Member;
 
-    private String mamer_name;
-    private Date member_Date_of_Birth;
+    private String membername;
+    private String birth;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Idx_Admin")
+    private AdministratorMember administratorMember;
 
 }

@@ -1,7 +1,10 @@
 package com.helpme.MembershipFee.web.dto;
 
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
+import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -10,15 +13,14 @@ import lombok.*;
 @Builder
 public class MemberSaveRequestDto {
 
-    private String name;
-    private String email;
-    private String password;
 
-    public AdministratorMember toEntity(){
-        return AdministratorMember.builder()
-                .email(email)
-                .password(password)
-                .name(name)
+    private String membername;
+    private String birth;
+
+    public Member toEntity(){
+        return Member.builder()
+                .membername(membername)
+                .birth(birth)
                 .build();
     }
 

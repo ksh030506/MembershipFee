@@ -1,6 +1,6 @@
 package com.helpme.MembershipFee.domain.administratorMember;
 
-import com.helpme.MembershipFee.domain.BaseTimeEntity;
+import com.helpme.MembershipFee.common.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
