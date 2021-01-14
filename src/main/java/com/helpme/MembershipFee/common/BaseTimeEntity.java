@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 //부모 클래스로 만들어 모든 파일에 상속
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseTimeEntity { //생성 날짜 자동 생성 클래스
+//생성 날짜 자동 생성 클래스
+public abstract class BaseTimeEntity {
 
+    //생성 날짜
     @CreatedDate
     private LocalDateTime createdDate;
 

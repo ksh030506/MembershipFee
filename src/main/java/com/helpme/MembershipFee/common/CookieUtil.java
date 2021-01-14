@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
+//쿠키 생성 및 조회 클래스
 public class CookieUtil {
 
     //쿠키 생성
@@ -19,7 +20,7 @@ public class CookieUtil {
     //쿠키 조회
     public Cookie getCookie(HttpServletRequest req, String cookieName){
         final Cookie[] cookies = req.getCookies();
-        if(cookies==null) return null;
+        if(cookies == null) return null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(cookieName))
                 return cookie;

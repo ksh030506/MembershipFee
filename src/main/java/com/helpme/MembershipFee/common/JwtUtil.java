@@ -13,18 +13,22 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
+//Token Util 클래스
 public class JwtUtil {
 
     final static public String ACCESS_TOKEN_NAME = "accessToken";
 
+    //secret 가져오기
     @Value("${spring.jwt.secret}")
     private String SECRET_KEY;
 
+    //Key를 가져오기
     private Key getSigningKey(String secretKey){
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    //
     public Claims extractAllClaims(String token) throws ExpiredJwtException {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey(SECRET_KEY))

@@ -7,7 +7,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class Member extends BaseTimeEntity {
     private String birth;
 
     //어떤 관리자가 추가했는지 알 수 있는 FK
-    //LAZY => 지연로딩
+    //LAZY => 지연로딩 (나중에 fetchJoin으로 해결)
     //Table 설계 X, 객체지향적 설계 O
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idx_Admin")

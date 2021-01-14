@@ -43,12 +43,14 @@ public class MemberService {
             out.println("<script>alert('이름이 중복되었습니다.'); history.go(-1);</script>");
             out.flush();
         }
-        if (!jwtUtil.validateToken(token, administratorMember)) {
-            throw new Exception("회원 인증 실패");
-        }
+//        if (!jwtUtil.validateToken(token, administratorMember)) {
+//            throw new Exception("회원 인증 실패");
+//        }
+        jwtUtil.validateToken(token, administratorMember);
         return memberRepository.save(member).getIdx_Member();
     }
 
+    //이름 중복 검사
     public Boolean CheckName(String name){
         Member member = memberRepository.findByMembername(name);
         if(member == null) {

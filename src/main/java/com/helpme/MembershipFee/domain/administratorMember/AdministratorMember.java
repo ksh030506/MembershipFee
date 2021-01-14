@@ -5,12 +5,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-
 @Builder
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class AdministratorMember extends BaseTimeEntity {
 

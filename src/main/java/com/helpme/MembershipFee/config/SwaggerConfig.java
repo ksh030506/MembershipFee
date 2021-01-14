@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 @Configuration
 @EnableSwagger2
+//API Docs 자동화 클래스
 public class SwaggerConfig {
     private String version;
     private String title;
