@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//관리자 로그인 클래스 DTO(데이터 교환)
 public class AdministratorMemberLoginRequestDto {
 
     private String email;

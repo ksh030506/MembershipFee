@@ -3,6 +3,7 @@ package com.helpme.MembershipFee.common;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+//비밀번호 인코딩
 public class PasswordEncoding implements PasswordEncoder {
     private PasswordEncoder passwordEncoder;
 

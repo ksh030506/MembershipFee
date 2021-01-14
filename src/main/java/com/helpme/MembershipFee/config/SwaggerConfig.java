@@ -19,21 +19,20 @@ public class SwaggerConfig {
     private String version;
     private String title;
 
+    //API 정보
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,
                 "Swagger로 생성한 API Docs",
                 version,
                 "www.membershipfee.com",
-                new Contact("Contact Me", "www.example.com", "foo@example.com"),
+                new Contact("김상현", "", "sanghyeon030506@gmail.com"),
                 "Licenses",
-
                 "www.example.com",
-
                 new ArrayList<>());
     }
 
-
+    //V1 API
     @Bean
     public Docket apiV1() {
         version = "V1";
