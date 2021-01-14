@@ -30,17 +30,22 @@ public class MemberService {
     private JwtUtil jwtUtil;
 
     @Transactional
-    public void save(HttpServletRequest req, MemberSaveRequestDto memberSaveRequestDto){
+    public void save(HttpServletRequest req, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
         if(validateToken(req) == true) {
-            String userEmail = getUserEmail(req);
-            AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-            Member member = Member.builder()
-                    .membername(memberSaveRequestDto.getMembername())
-                    .birth(memberSaveRequestDto.getBirth())
-                    .administratorMember(administratorMember)
-                    .build();
-            memberRepository.save(member);
+            if(CheckName(memberSaveRequestDto.getMembername()) == false){
+                throw new Exception("이름 중복");
+            } else {
+                String userEmail = getUserEmail(req);
+                AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+                Member member = Member.builder()
+                        .membername(memberSaveRequestDto.getMembername())
+                        .birth(memberSaveRequestDto.getBirth())
+                        .administratorMember(administratorMember)
+                        .build();
+                memberRepository.save(member);
+            }
         } else {
+            //예러 처리
             new Exception("로그인 해주세요");
         }
     }
@@ -57,5 +62,13 @@ public class MemberService {
         final String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         return administratorMember.getEmail();
+    }
+
+    public Boolean CheckName(String name){
+        Member member = memberRepository.findByMembername(name);
+        if(member == null) {
+            return true;
+        }
+        return false;
     }
 }
