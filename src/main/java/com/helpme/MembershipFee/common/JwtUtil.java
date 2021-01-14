@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
@@ -38,11 +39,11 @@ public class JwtUtil {
         return extractAllClaims(token).get("userEmail", String.class);
     }
 
-
     public String generateToken(AdministratorMember member) {
         return doGenerateToken(member.getEmail());
     }
 
+    //토큰 생성
     public String doGenerateToken(String userEmail){
         Claims claims = Jwts.claims();
         claims.put("userEmail", userEmail);
@@ -55,10 +56,9 @@ public class JwtUtil {
         return jwt;
     }
 
-    //여기 다시 확인하기
+    //토큰 검사
     public Boolean validateToken(String token, AdministratorMember member) {
         final String username = getUserEmail(token);
-
         return (username.equals(member.getEmail()));
 
     }

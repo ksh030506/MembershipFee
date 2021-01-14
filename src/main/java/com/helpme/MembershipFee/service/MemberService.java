@@ -11,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 @Service
 public class MemberService {
@@ -30,38 +31,26 @@ public class MemberService {
     private JwtUtil jwtUtil;
 
     @Transactional
-    public void save(HttpServletRequest req, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
-        if(validateToken(req) == true) {
+    public void save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
+        final String token = req.getHeader("userEmail");
+        String userEmail = jwtUtil.getUserEmail(token);
+        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+        Member member = Member.builder()
+                .membername(memberSaveRequestDto.getMembername())
+                .birth(memberSaveRequestDto.getBirth())
+                .administratorMember(administratorMember)
+                .build();
+
+        if(jwtUtil.validateToken(token, administratorMember) == true) {
             if(CheckName(memberSaveRequestDto.getMembername()) == false){
-                throw new Exception("이름 중복");
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>alert('이름이 중복되었습니다.'); history.go(-1);</script>");
+                out.flush();
             } else {
-                String userEmail = getUserEmail(req);
-                AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-                Member member = Member.builder()
-                        .membername(memberSaveRequestDto.getMembername())
-                        .birth(memberSaveRequestDto.getBirth())
-                        .administratorMember(administratorMember)
-                        .build();
                 memberRepository.save(member);
             }
-        } else {
-            //예러 처리
-            new Exception("로그인 해주세요");
         }
-    }
-
-    public Boolean validateToken(HttpServletRequest req) {
-        final String token = req.getHeader("userEmail");
-        final String userEmail = jwtUtil.getUserEmail(token);
-        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-        return (userEmail.equals(administratorMember.getEmail()));
-    }
-
-    public String getUserEmail(HttpServletRequest req){
-        final String token = req.getHeader("userEmail");
-        final String userEmail = jwtUtil.getUserEmail(token);
-        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-        return administratorMember.getEmail();
     }
 
     public Boolean CheckName(String name){
