@@ -1,8 +1,8 @@
 package com.helpme.MembershipFee.service;
 
 import com.helpme.MembershipFee.common.PasswordEncoding;
-import com.helpme.MembershipFee.domain.members.Member;
-import com.helpme.MembershipFee.domain.members.MemberRepository;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
 import com.helpme.MembershipFee.web.dto.MemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class MemberService {
+public class AdministratorMemberService {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private AdministratorMemberRepository administratorMemberRepository;
 
     @Transactional
     public void save(MemberSaveRequestDto memberSaveRequestDto) throws Exception {
@@ -33,11 +33,11 @@ public class MemberService {
         String newPassword1 = passwordEncoder.encode(memberSaveRequestDto.getPassword());
         System.out.println(newPassword1);
         memberSaveRequestDto.setPassword(newPassword1);
-        memberRepository.save(memberSaveRequestDto.toEntity());
+        administratorMemberRepository.save(memberSaveRequestDto.toEntity());
     }
 
     public Boolean checkEmail(String email){
-        Member member = memberRepository.findByEmail(email);
+        AdministratorMember member = administratorMemberRepository.findByEmail(email);
         if(member == null){
             return true;
         }
@@ -45,7 +45,7 @@ public class MemberService {
     }
 
     public Boolean checkName(String name){
-        Optional<Member> member = memberRepository.findByName(name);
+        Optional<AdministratorMember> member = administratorMemberRepository.findByName(name);
         if(member.isEmpty()){
             return true;
         }
@@ -64,9 +64,9 @@ public class MemberService {
     }
 
     @Transactional
-    public Member findByEmail(MemberLoginRequestDto memberLoginRequestDto) throws Exception {
+    public AdministratorMember findByEmail(MemberLoginRequestDto memberLoginRequestDto) throws Exception {
         PasswordEncoder passwordEncoder = new PasswordEncoding();
-        Member member = memberRepository.findByEmail(memberLoginRequestDto.getEmail());
+        AdministratorMember member = administratorMemberRepository.findByEmail(memberLoginRequestDto.getEmail());
 
         if(member == null){
             throw new Exception ("아이디가 없음");

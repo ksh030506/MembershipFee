@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.common.RedisUtil;
-import com.helpme.MembershipFee.domain.members.Member;
-import com.helpme.MembershipFee.service.MemberService;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
+import com.helpme.MembershipFee.service.AdministratorMemberService;
 import com.helpme.MembershipFee.web.dto.MemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("/api/v1")
 @RestController
-public class MemberController {
+public class AdministratorMemberController {
 
     @Autowired
-    private MemberService memberService;
+    private AdministratorMemberService administratorMemberService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -39,7 +39,7 @@ public class MemberController {
     public String signUpUser(@RequestBody MemberSaveRequestDto memberSaveRequestDto) throws Exception {
         JsonObject obj = new JsonObject();
         try {
-            memberService.save(memberSaveRequestDto);
+            administratorMemberService.save(memberSaveRequestDto);
             obj.addProperty("msg", "회원가입 성공");
         } catch (Exception e){
             System.out.println(e);
@@ -52,7 +52,7 @@ public class MemberController {
     public String loginUser(@RequestBody MemberLoginRequestDto memberLoginRequestDto, HttpServletRequest req, HttpServletResponse res) throws Exception {
         JsonObject obj = new JsonObject();
         try {
-            final Member member = memberService.findByEmail(memberLoginRequestDto);
+            final AdministratorMember member = administratorMemberService.findByEmail(memberLoginRequestDto);
             final String token = jwtUtil.generateToken(member);
             final  String refreshJwt = jwtUtil.generateRefreshToken(member);
 

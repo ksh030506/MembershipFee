@@ -1,6 +1,6 @@
 package com.helpme.MembershipFee.common;
 
-import com.helpme.MembershipFee.domain.members.Member;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -48,11 +48,11 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 
-    public String generateToken(Member member) {
+    public String generateToken(AdministratorMember member) {
         return doGenerateToken(member.getEmail(), TOKEN_VALIDATION_SECOND);
     }
 
-    public String generateRefreshToken(Member member){
+    public String generateRefreshToken(AdministratorMember member){
         return doGenerateToken(member.getEmail(), REFRESH_TOKEN_VALIDATION_SECOND);
     }
 
@@ -70,7 +70,7 @@ public class JwtUtil {
     }
 
     //여기 다시 확인하기
-    public Boolean validateToken(String token, Member member) {
+    public Boolean validateToken(String token, AdministratorMember member) {
         final String username = getUserEmail(token);
 
         return (username.equals(member.getEmail()) && !isTokenExpired(token));

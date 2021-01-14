@@ -1,6 +1,6 @@
 package com.helpme.MembershipFee.web.dto;
 
-import com.helpme.MembershipFee.domain.members.Member;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
 
 @Getter
@@ -14,8 +14,8 @@ public class MemberSaveRequestDto {
     private String email;
     private String password;
 
-    public Member toEntity(){
-        return Member.builder()
+    public AdministratorMember toEntity(){
+        return AdministratorMember.builder()
                 .email(email)
                 .password(password)
                 .name(name)

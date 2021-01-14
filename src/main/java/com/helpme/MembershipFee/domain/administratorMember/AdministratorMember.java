@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.domain.members;
+package com.helpme.MembershipFee.domain.administratorMember;
 
 import com.helpme.MembershipFee.domain.BaseTimeEntity;
 import lombok.*;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Member extends BaseTimeEntity {
+public class AdministratorMember extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

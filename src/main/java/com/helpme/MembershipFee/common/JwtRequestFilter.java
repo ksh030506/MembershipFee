@@ -1,7 +1,7 @@
 package com.helpme.MembershipFee.common;
 
-import com.helpme.MembershipFee.domain.members.Member;
-import com.helpme.MembershipFee.domain.members.MemberRepository;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -33,7 +32,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private RedisUtil redisUtil;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private AdministratorMemberRepository administratorMemberRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
@@ -50,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 userEmail = jwtUtil.getUserEmail(jwt);
             }
             if(userEmail != null){
-                Member member = memberRepository.findByEmail(userEmail);
+                AdministratorMember member = administratorMemberRepository.findByEmail(userEmail);
 
                 if(jwtUtil.validateToken(jwt, member)){
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(member,null);
@@ -72,12 +71,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 refreshUemail = redisUtil.getData(refreshJwt);
 
                 if(refreshUemail.equals(jwtUtil.getUserEmail(refreshJwt))){
-                    Member member = memberRepository.findByEmail(refreshUemail);
+                    AdministratorMember member = administratorMemberRepository.findByEmail(refreshUemail);
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(member,null);
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
-                    Member member_1 = new Member();
+                    AdministratorMember member_1 = new AdministratorMember();
                     member_1.setEmail(refreshUemail);
                     String newToken = jwtUtil.generateToken(member_1);
 
