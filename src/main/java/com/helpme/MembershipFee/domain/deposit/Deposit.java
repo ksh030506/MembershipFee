@@ -1,12 +1,10 @@
 package com.helpme.MembershipFee.domain.deposit;
 
 import com.helpme.MembershipFee.common.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,6 +19,10 @@ public class Deposit extends BaseTimeEntity {
     private Long Idx_Deposit;
 
     private String savename;
-    private String price;
+    private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Idx_Member")
+    private Member member;
 
 }
