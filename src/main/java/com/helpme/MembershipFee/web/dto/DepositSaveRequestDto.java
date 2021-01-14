@@ -19,5 +19,4 @@ public class DepositSaveRequestDto {
                 .price(price)
                 .build();
     }
-
 }

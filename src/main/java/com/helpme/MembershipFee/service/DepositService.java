@@ -26,9 +26,7 @@ public class DepositService {
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-        if(jwtUtil.validateToken(token, administratorMember) == false){
-            throw new IllegalArgumentException("로그인을 해주세요");
-        }
+        jwtUtil.validateToken(token, administratorMember);
         return depositRepository.save(depositSaveRequestDto.toEntity()).getIdx_Deposit();
     }
 }
