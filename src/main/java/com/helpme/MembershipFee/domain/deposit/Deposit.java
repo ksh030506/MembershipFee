@@ -3,8 +3,11 @@ package com.helpme.MembershipFee.domain.deposit;
 import com.helpme.MembershipFee.common.BaseTimeEntity;
 import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,7 +15,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Deposit extends BaseTimeEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Deposit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +25,8 @@ public class Deposit extends BaseTimeEntity {
     private String savename;
     private int price;
 
+    //생성 날짜
+    @CreatedDate
+    private LocalDateTime createdDate;
 
 }
