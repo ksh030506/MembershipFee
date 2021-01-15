@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.domain.member;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpme.MembershipFee.common.BaseTimeEntity;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
@@ -20,7 +21,9 @@ public class Member extends BaseTimeEntity {
 
     //유저 이름
     private String membername;
+
     //유저 생일
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private String birth;
 
     //어떤 관리자가 추가했는지 알 수 있는 FK
@@ -29,5 +32,4 @@ public class Member extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idx_Admin")
     private AdministratorMember administratorMember;
-
 }

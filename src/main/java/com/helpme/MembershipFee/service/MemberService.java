@@ -5,7 +5,7 @@ import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
 import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.member.MemberRepository;
-import com.helpme.MembershipFee.domain.member.apiReturn;
+import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Service
@@ -39,7 +38,6 @@ public class MemberService {
                 .birth(memberSaveRequestDto.getBirth())
                 .administratorMember(administratorMember)
                 .build();
-
         CheckName(memberSaveRequestDto.getMembername());
         jwtUtil.validateToken(token, administratorMember);
         return memberRepository.save(member).getIdx_Member();
@@ -55,12 +53,12 @@ public class MemberService {
     }
 
     @Transactional
-    public List<apiReturn> GetUserName(HttpServletRequest req){
+    public List<nameReturn> GetUserName(HttpServletRequest req){
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
-        List<apiReturn> member = memberRepository.findAllBy();
+        List<nameReturn> member = memberRepository.findAllBy();
         return member;
     }
 }

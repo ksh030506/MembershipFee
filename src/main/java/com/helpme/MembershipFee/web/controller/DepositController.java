@@ -1,7 +1,6 @@
 package com.helpme.MembershipFee.web.controller;
 
-import com.helpme.MembershipFee.domain.member.Member;
-import com.helpme.MembershipFee.domain.member.apiReturn;
+import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.DepositService;
 import com.helpme.MembershipFee.service.MemberService;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
@@ -39,8 +38,8 @@ public class DepositController {
 
     @ResponseBody
     @GetMapping("pullusername")
-    public List<apiReturn> PullUserName(HttpServletRequest req){
-        List<apiReturn> members = memberService.GetUserName(req);
+    public List<nameReturn> PullUserName(HttpServletRequest req){
+        List<nameReturn> members = memberService.GetUserName(req);
         return members;
     }
 
