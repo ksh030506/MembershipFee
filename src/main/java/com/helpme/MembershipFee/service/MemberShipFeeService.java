@@ -38,7 +38,7 @@ public class MemberShipFeeService {
         MemberShipFee memberShipFee = MemberShipFee.builder()
                 .purposeofuse(memberShipFeeSaveRequestDto.getPurposeofuse())
                 .membershipfee(memberShipFeeSaveRequestDto.getMembershipfee())
-                .dataofuse(memberShipFeeSaveRequestDto.getDateofuse())
+                .dateofuse(memberShipFeeSaveRequestDto.getDateofuse())
                 .administratorMember(administratorMember)
                 .build();
         jwtUtil.validateToken(token, administratorMember);

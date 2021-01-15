@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.web.controller;
+package com.helpme.MembershipFee.web.controller.v1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

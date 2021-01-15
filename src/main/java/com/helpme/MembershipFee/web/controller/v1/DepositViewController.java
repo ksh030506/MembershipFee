@@ -1,16 +1,13 @@
-package com.helpme.MembershipFee.web.controller;
+package com.helpme.MembershipFee.web.controller.v1;
 
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.service.DepositViewService;
 import com.helpme.MembershipFee.service.MemberService;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
-import com.helpme.MembershipFee.web.dto.DepositViewResponse;
-import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

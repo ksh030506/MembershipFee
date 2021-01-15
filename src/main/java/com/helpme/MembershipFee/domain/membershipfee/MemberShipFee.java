@@ -27,7 +27,7 @@ public class MemberShipFee {
 
     //회비 사용 날짜
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
-    private String dataofuse;
+    private String dateofuse;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idx_Admin")

@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.web.controller;
+package com.helpme.MembershipFee.web.controller.v1;
 
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
