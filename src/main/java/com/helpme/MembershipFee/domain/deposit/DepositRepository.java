@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.domain.deposit;
 
+import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
 import com.helpme.MembershipFee.web.dto.DepositViewResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
 
     @Query("select SUM(p.price) from Deposit p")
     Integer findSUMprice();
+
+    List<Deposit> findBySavename(String name);
 }
