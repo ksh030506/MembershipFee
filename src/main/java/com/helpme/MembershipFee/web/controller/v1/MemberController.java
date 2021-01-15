@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("/api/v1")
 @RestController
 public class MemberController {
     @Autowired

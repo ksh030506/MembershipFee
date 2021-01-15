@@ -3,8 +3,8 @@ package com.helpme.MembershipFee.web.controller.v1;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/api/v1")
 @Controller
 public class ViewController {
 
@@ -15,7 +15,7 @@ public class ViewController {
     }
 
     //회원가입 페이지
-    @GetMapping("/register")
+    @RequestMapping(value="/register" , method = {RequestMethod.GET, RequestMethod.POST})
     public String register(){
         return "register";
     }

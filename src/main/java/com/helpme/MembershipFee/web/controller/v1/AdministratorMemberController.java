@@ -6,6 +6,7 @@ import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.service.AdministratorMemberService;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberSaveRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("/api/v1")
+@RequiredArgsConstructor
 @RestController
 public class AdministratorMemberController {
 
@@ -28,8 +29,7 @@ public class AdministratorMemberController {
     @Autowired
     private CookieUtil cookieUtil;
 
-    @ResponseBody
-    @PostMapping("/signup")
+    @RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, String> signUpUser(@RequestBody AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         //Json으로 보내기 위해 사용
         Map<String, String> map = new HashMap<>();
