@@ -18,7 +18,8 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-public class AdministratorMemberController {
+@RequestMapping("/api/v1")
+public class AdministratorMemberController_v1 {
 
     @Autowired
     private AdministratorMemberService administratorMemberService;

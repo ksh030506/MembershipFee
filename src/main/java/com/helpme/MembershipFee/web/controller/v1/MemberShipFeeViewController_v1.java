@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@RequestMapping("/api/v1")
 @RestController
-public class MemberShipFeeViewController {
+public class MemberShipFeeViewController_v1 {
 
     @Autowired
     private MemberShipFeeViewService memberShipFeeViewService;

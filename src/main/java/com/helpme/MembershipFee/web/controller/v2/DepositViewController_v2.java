@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.web.controller.v1;
+package com.helpme.MembershipFee.web.controller.v2;
 
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.service.DepositViewService;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class DepositViewController {
+public class DepositViewController_v2 {
 
     @Autowired
     private DepositViewService depositViewService;

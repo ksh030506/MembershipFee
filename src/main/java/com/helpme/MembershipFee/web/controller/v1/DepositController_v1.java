@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class DepositController {
+@RequestMapping("/api/v1")
+public class DepositController_v1 {
 
     @Autowired
     private DepositService depositService;

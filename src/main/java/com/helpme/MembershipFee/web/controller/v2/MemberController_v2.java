@@ -1,9 +1,12 @@
-package com.helpme.MembershipFee.web.controller.v1;
+package com.helpme.MembershipFee.web.controller.v2;
 
 import com.helpme.MembershipFee.service.MemberService;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class MemberController {
+public class MemberController_v2 {
     @Autowired
     private MemberService memberService;
 
