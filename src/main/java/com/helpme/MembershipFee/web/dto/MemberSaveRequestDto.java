@@ -17,6 +17,6 @@ public class MemberSaveRequestDto {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
     private String membername;
-    private String birth = simpleDateFormat.format(new Date());;
+    private String birth = simpleDateFormat.format(new Date());
 
 }
