@@ -56,7 +56,7 @@ public class DepositController_v1 {
 
     @ResponseBody
     @GetMapping("/ispay")
-    public List<Deposit> findByIsPay(HttpServletRequest req){
+    public List<Deposit> findByIsPay(HttpServletRequest req) {
         return depositService.findByIsPay(Deposit_IsPay.NO_PAY, req);
     }
 

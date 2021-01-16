@@ -44,6 +44,7 @@ public class DepositService {
         Deposit deposit = Deposit.builder()
                 .savename(depositSaveRequestDto.getSavename())
                 .price(depositSaveRequestDto.getPrice())
+                .member(member)
                 .build();
         if(depositSaveRequestDto.getDeposit_isPay()){
             deposit.setIsPay(Deposit_IsPay.IS_PAY);
@@ -73,6 +74,7 @@ public class DepositService {
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
+        List<String> depositList = depositRepository.findSUMpriceBymember();
         return depositRepository.findSUMpriceBymember();
     }
 

@@ -30,7 +30,7 @@ public class AdministratorMemberService {
             throw new Exception("이름 중복");
         }
         //비밀번호 검사
-        chekPassword(administratorMemberSaveRequestDto.getPassword());
+        //chekPassword(administratorMemberSaveRequestDto.getPassword());
         //비밀번호 암호화
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         String newPassword1 = passwordEncoder.encode(administratorMemberSaveRequestDto.getPassword());

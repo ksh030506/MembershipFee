@@ -26,8 +26,11 @@ public class Deposit extends BaseTimeEntity {
     private String savename;
     private int price;
 
-
     @Enumerated(EnumType.STRING)
     private Deposit_IsPay isPay;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Idx_Member")
+    private Member member;
 
 }
