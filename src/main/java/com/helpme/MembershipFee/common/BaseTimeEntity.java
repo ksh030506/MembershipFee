@@ -1,10 +1,12 @@
 package com.helpme.MembershipFee.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //부모 클래스로 만들어 모든 파일에 상속
@@ -15,9 +17,10 @@ public abstract class BaseTimeEntity {
 
     //생성 날짜
     @CreatedDate
-    private LocalDateTime createdDate;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+    private LocalDate createdDate;
 
-    public LocalDateTime getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 

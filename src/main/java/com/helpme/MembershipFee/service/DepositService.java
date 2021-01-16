@@ -9,6 +9,7 @@ import com.helpme.MembershipFee.domain.member.MemberRepository;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,6 +28,7 @@ public class DepositService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Transactional
     public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
@@ -44,5 +46,8 @@ public class DepositService {
         }
         return true;
     }
+
+    //입금 내역 날짜 조회
+
 
 }

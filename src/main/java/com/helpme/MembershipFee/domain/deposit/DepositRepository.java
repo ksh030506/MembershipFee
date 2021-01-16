@@ -12,4 +12,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     Integer findSUMprice();
 
     List<Deposit> findBySavename(String name);
+
+
 }

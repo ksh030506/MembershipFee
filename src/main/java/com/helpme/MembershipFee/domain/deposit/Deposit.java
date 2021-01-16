@@ -1,13 +1,13 @@
 package com.helpme.MembershipFee.domain.deposit;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpme.MembershipFee.common.BaseTimeEntity;
-import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Deposit {
+public class Deposit extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +23,5 @@ public class Deposit {
 
     private String savename;
     private int price;
-
-    //생성 날짜
-    @CreatedDate
-    private LocalDateTime createdDate;
 
 }
