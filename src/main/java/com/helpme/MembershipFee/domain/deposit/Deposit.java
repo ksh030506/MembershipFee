@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class Deposit extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Idx_Deposit;
 
     private String savename;
@@ -29,9 +29,5 @@ public class Deposit extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Deposit_IsPay isPay;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Idx_Member")
-    private Member member;
 
 }

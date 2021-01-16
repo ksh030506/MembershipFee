@@ -44,7 +44,6 @@ public class DepositService {
         Deposit deposit = Deposit.builder()
                 .savename(depositSaveRequestDto.getSavename())
                 .price(depositSaveRequestDto.getPrice())
-                .member(member)
                 .build();
         if(depositSaveRequestDto.getDeposit_isPay()){
             deposit.setIsPay(Deposit_IsPay.IS_PAY);
@@ -76,4 +75,16 @@ public class DepositService {
         jwtUtil.validateToken(token, administratorMember);
         return depositRepository.findSUMpriceBymember();
     }
+
+
+    //미납 내역 조회
+    @Transactional
+    public List<Deposit> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
+        final String token = req.getHeader("userEmail");
+        String userEmail = jwtUtil.getUserEmail(token);
+        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+        jwtUtil.validateToken(token, administratorMember);
+        return depositRepository.findByIsPay(deposit_isPay);
+    }
+
 }

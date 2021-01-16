@@ -19,4 +19,9 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     List<String> findSUMpriceBymember();
 
     List<Deposit> findBySavename(String name);
+
+
+    //미납내역 조회 (전체)
+    List<Deposit> findByIsPay(Deposit_IsPay deposit_isPay);
+
 }

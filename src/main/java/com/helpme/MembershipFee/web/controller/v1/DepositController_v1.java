@@ -1,5 +1,7 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.domain.deposit.Deposit;
+import com.helpme.MembershipFee.domain.deposit.Deposit_IsPay;
 import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.DepositService;
 import com.helpme.MembershipFee.service.MemberService;
@@ -49,6 +51,13 @@ public class DepositController_v1 {
     @GetMapping("/pricemember")
     public List<String> findPriceGroupMember(HttpServletRequest req){
         return depositService.GroupMemberPrice(req);
+    }
+
+
+    @ResponseBody
+    @GetMapping("/ispay")
+    public List<Deposit> findByIsPay(HttpServletRequest req){
+        return depositService.findByIsPay(Deposit_IsPay.NO_PAY, req);
     }
 
 }

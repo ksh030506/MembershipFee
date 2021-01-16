@@ -29,6 +29,8 @@ public class AdministratorMemberService {
         } else if(!checkName(administratorMemberSaveRequestDto.getName())){
             throw new Exception("이름 중복");
         }
+        //비밀번호 검사
+        chekPassword(administratorMemberSaveRequestDto.getPassword());
         //비밀번호 암호화
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         String newPassword1 = passwordEncoder.encode(administratorMemberSaveRequestDto.getPassword());
@@ -46,7 +48,7 @@ public class AdministratorMemberService {
             if(!m.matches()) {
                 throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합하여 사용해주세요");
             }
-        } else if(password.length() >= 8 && password.length() < 10){
+        } else if(password.length() < 10 && password.length() >= 8){
             //영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합(정규식)
             String regex = "";
             Pattern p = Pattern.compile(regex);
@@ -54,8 +56,8 @@ public class AdministratorMemberService {
             if(!m.matches()) {
                 throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 3종류를 조합하여 사용해주세요");
             }
-        } else {
-            throw new Exception("최소 8자리 이상 작성해주세요");
+        } else if(password.length() < 8){
+            throw new Exception("비밀번호는 8자리 이상작성해 주세요");
         }
         return true;
     }
