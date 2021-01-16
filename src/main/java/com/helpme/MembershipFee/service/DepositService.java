@@ -27,12 +27,22 @@ public class DepositService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req){
+    public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
+        findByName(depositSaveRequestDto.getSavename());
         return depositRepository.save(depositSaveRequestDto.toEntity()).getIdx_Deposit();
     }
-    //
+
+    //이름 검색
+    public Boolean findByName(String name) throws Exception {
+        Member member = memberRepository.findByMembername(name);
+        if(member == null){
+            throw new Exception("이름이 없습니다");
+        }
+        return true;
+    }
+
 }

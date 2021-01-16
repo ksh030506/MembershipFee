@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/v2")
 public class DepositViewController_v2 {
 
     @Autowired

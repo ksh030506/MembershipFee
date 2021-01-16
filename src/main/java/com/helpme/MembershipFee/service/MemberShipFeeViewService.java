@@ -26,15 +26,15 @@ public class MemberShipFeeViewService {
     private JwtUtil jwtUtil;
 
     @Transactional
-    public List<MemberShipFee> findMemberShipFee(HttpServletRequest req) throws Exception {
+    public List<MemberShipFeeReturn> findMemberShipFee(HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
         //토큰 검사를 위한 관리자 계정 찾기
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
-        List<MemberShipFee> memberShipFeeList = memberShipFeeRepository.findAll();
-        if(memberShipFeeList == null) throw new Exception("데이터가 없습니다.");
-        return memberShipFeeList;
+        List<MemberShipFeeReturn> memberShipFeeListRe = memberShipFeeRepository.findAllBy();
+        if(memberShipFeeListRe == null) throw new Exception("데이터가 없습니다.");
+        return memberShipFeeListRe;
     }
 
 

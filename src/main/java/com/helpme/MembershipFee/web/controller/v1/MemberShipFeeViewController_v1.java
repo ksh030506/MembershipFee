@@ -1,9 +1,7 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
 
-import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
-import com.helpme.MembershipFee.service.MemberShipFeeService;
 import com.helpme.MembershipFee.service.MemberShipFeeViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +18,7 @@ public class MemberShipFeeViewController_v1 {
 
     @ResponseBody
     @GetMapping("/getmembershipfee")
-    public List<MemberShipFee> findAll(HttpServletRequest req) throws Exception {
+    public List<MemberShipFeeReturn> findAll(HttpServletRequest req) throws Exception {
         return memberShipFeeViewService.findMemberShipFee(req);
     }
 }

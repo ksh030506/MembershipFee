@@ -6,11 +6,10 @@
     </head>
     <body>
         <h1>회원 추가</h1>
-        <form action="" method="post">
-            <p>이름 : <input type="text" id="name" name="name"></p>
-            <p>생년월일 : <input type="text" id="birth" name="birth"></p>
-            <p>등록 일시 : <input type="text" id="addDate" name="addDate"></p>
-            <a href="#">저장</a>
+        <form action="/api/v2/useradd" method="POST">
+            <p>이름 : <input type="text" id="name" name="name" th:name="name"></p>
+            <p>생년월일 : <input type="text" id="birth" name="birth" th:name="birth"></p>
+            <button type="submit">회원 저장</button>
         </form>
     </body>
 </html>
