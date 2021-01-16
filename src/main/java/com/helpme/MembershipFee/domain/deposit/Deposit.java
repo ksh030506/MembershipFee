@@ -2,6 +2,8 @@ package com.helpme.MembershipFee.domain.deposit;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpme.MembershipFee.common.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
+import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,5 +25,13 @@ public class Deposit extends BaseTimeEntity {
 
     private String savename;
     private int price;
+
+
+    @Enumerated(EnumType.STRING)
+    private Deposit_IsPay isPay;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Idx_Member")
+    private Member member;
 
 }

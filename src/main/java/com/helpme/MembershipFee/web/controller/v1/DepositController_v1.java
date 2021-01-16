@@ -3,6 +3,7 @@ package com.helpme.MembershipFee.web.controller.v1;
 import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.DepositService;
 import com.helpme.MembershipFee.service.MemberService;
+import com.helpme.MembershipFee.web.dto.DepositFindSumGroupByMemberNameDto;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,17 @@ public class DepositController_v1 {
     }
 
     @ResponseBody
-    @GetMapping("pullusername")
+    @GetMapping("/pullusername")
     public List<nameReturn> PullUserName(HttpServletRequest req){
         List<nameReturn> members = memberService.GetUserName(req);
         return members;
+    }
+
+
+    @ResponseBody
+    @GetMapping("/pricemember")
+    public List<String> findPriceGroupMember(HttpServletRequest req){
+        return depositService.GroupMemberPrice(req);
     }
 
 }
