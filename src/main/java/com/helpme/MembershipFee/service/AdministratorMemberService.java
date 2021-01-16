@@ -74,7 +74,7 @@ public class AdministratorMemberService {
             throw new Exception ("아이디가 없음");
         }
         //저장되어 있는 암호화 비밀번호와 Request한 비밀번호를 PasswordEncoder로 비교
-        if(passwordEncoder.matches(administratorMemberLoginRequestDto.getPassword(), member.getPassword()) == false){
+        else if(passwordEncoder.matches(administratorMemberLoginRequestDto.getPassword(), member.getPassword()) == false){
             throw new Exception ("비밀번호가 틀립니다.");
         }
         return member;
