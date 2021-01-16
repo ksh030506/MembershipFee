@@ -4,6 +4,8 @@ package com.helpme.MembershipFee.web.controller.v1;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.service.MemberShipFeeViewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,8 @@ public class MemberShipFeeViewController_v1 {
 
     @ResponseBody
     @GetMapping("/getmembershipfee")
-    public List<MemberShipFeeReturn> findAll(HttpServletRequest req) throws Exception {
-        return memberShipFeeViewService.findMemberShipFee(req);
+    public Page<MemberShipFeeReturn> findAll(HttpServletRequest req, Pageable pageable) throws Exception {
+        return memberShipFeeViewService.findMemberSipFeepage(req, pageable);
     }
+
 }

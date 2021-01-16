@@ -7,6 +7,8 @@ import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFeeRepository;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,19 +28,14 @@ public class MemberShipFeeViewService {
     private JwtUtil jwtUtil;
 
     @Transactional
-    public List<MemberShipFeeReturn> findMemberShipFee(HttpServletRequest req) throws Exception {
+    public Page<MemberShipFeeReturn> findMemberSipFeepage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
         //토큰 검사를 위한 관리자 계정 찾기
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
-        List<MemberShipFeeReturn> memberShipFeeListRe = memberShipFeeRepository.findAllBy();
+        Page<MemberShipFeeReturn> memberShipFeeListRe = memberShipFeeRepository.findAllBy(pageable);
         if(memberShipFeeListRe == null) throw new Exception("데이터가 없습니다.");
         return memberShipFeeListRe;
     }
-
-
-
-
-
 }

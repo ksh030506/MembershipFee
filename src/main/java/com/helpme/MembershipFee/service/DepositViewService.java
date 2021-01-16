@@ -7,6 +7,9 @@ import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,14 +28,26 @@ public class DepositViewService {
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
 
+//    @Transactional(readOnly = true)
+//    public List<Deposit> findAll(HttpServletRequest req) throws Exception {
+//        final String token = jwtUtil.GetTokenByHeader(req);
+//        String userEmail = jwtUtil.getUserEmail(token);
+//        //토큰 검사를 위한 관리자 계정 찾기
+//        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+//        jwtUtil.validateToken(token, administratorMember);
+//        List<Deposit> depositList = depositRepository.findAll();
+//        if(depositList == null) throw new Exception("데이터가 없습니다.");
+//        return depositList;
+//    }
+
     @Transactional(readOnly = true)
-    public List<Deposit> findAll(HttpServletRequest req) throws Exception {
+    public Page<Deposit> findAllPage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
         //토큰 검사를 위한 관리자 계정 찾기
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
-        List<Deposit> depositList = depositRepository.findAll();
+        Page<Deposit> depositList = depositRepository.findAll(pageable);
         if(depositList == null) throw new Exception("데이터가 없습니다.");
         return depositList;
     }
@@ -61,4 +76,5 @@ public class DepositViewService {
         if(depositList.isEmpty()) throw new Exception("데이터가 없습니다.");
         return depositList;
     }
+
 }

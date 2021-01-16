@@ -1,10 +1,13 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
 import com.helpme.MembershipFee.domain.deposit.Deposit;
+import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.service.DepositViewService;
 import com.helpme.MembershipFee.service.MemberService;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,12 +23,15 @@ public class DepositViewController_v1 {
     private DepositViewService depositViewService;
 
     @Autowired
+    private DepositRepository depositRepository;
+
+    @Autowired
     private MemberService memberService;
 
     @ResponseBody
     @GetMapping("/depositlist")
-    public List<Deposit> findAll(HttpServletRequest req) throws Exception {
-        return depositViewService.findAll(req);
+    public Page<Deposit> findAll(HttpServletRequest req, final Pageable pageable) throws Exception {
+        return depositViewService.findAllPage(req, pageable);
     }
 
     @ResponseBody

@@ -36,6 +36,30 @@ public class AdministratorMemberService {
         return administratorMemberRepository.save(administratorMemberSaveRequestDto.toEntity()).getIdx_Admin();
     }
 
+    //비밀번호 검사
+    public Boolean chekPassword(String password) throws Exception {
+        if(password.length() >= 10){
+            //영어 대문자, 소문자, 숫자, 특수문자 중 2종류 조합(정규식)
+            String regex = "";
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(password);
+            if(!m.matches()) {
+                throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합하여 사용해주세요");
+            }
+        } else if(password.length() >= 8 && password.length() < 10){
+            //영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합(정규식)
+            String regex = "";
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(password);
+            if(!m.matches()) {
+                throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 3종류를 조합하여 사용해주세요");
+            }
+        } else {
+            throw new Exception("최소 8자리 이상 작성해주세요");
+        }
+        return true;
+    }
+
     //이메일 중복 검사
     public Boolean checkEmail(String email){
         AdministratorMember member = administratorMemberRepository.findByEmail(email);
