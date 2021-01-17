@@ -81,7 +81,6 @@ public class DepositService {
         return depositRepository.findSUMpriceBymember();
     }
 
-
     //미납 내역 조회
     @Transactional
     public List<DepositReturn> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
@@ -91,7 +90,6 @@ public class DepositService {
         jwtUtil.validateToken(token, administratorMember);
         return depositRepository.findByIsPay(deposit_isPay);
     }
-
 
     //날짜 검색
     public List<Object> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
