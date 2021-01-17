@@ -4,14 +4,14 @@ import com.helpme.MembershipFee.service.MemberShipFeeService;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api/v1")
@@ -33,6 +33,13 @@ public class MemberShipFeeController_v1 {
             map.put("error", err);
         }
         return map;
+    }
+
+    //deposit 날짜 조회
+    @ResponseBody
+    @PostMapping("/memberdate")
+    public List<Object> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end){
+        return memberShipFeeService.findByCreateDateBetween(req, start, end);
     }
 
 }

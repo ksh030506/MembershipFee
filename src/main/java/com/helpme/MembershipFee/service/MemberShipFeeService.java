@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class MemberShipFeeService {
@@ -52,5 +54,14 @@ public class MemberShipFeeService {
         if(price_sum == null) throw new Exception("입금한 데이터가 없습니다.");
         if(price_sum < price) throw new Exception("입금 금액 보다 사용 금액이 더 많습니다.");
         return true;
+    }
+
+    //날짜 검색
+    public List<Object> findByCreateDateBetween(HttpServletRequest req, String start, String end){
+        final String token = req.getHeader("userEmail");
+        String userEmail = jwtUtil.getUserEmail(token);
+        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+        jwtUtil.validateToken(token, administratorMember);
+        return memberShipFeeRepository.findAllDateBetween(start, end);
     }
 }
