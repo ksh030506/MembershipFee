@@ -29,7 +29,7 @@ public class Deposit extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Deposit_IsPay isPay;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "Idx_Member")
     private Member member;
 
