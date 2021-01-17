@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DepositService {
@@ -64,21 +66,6 @@ public class DepositService {
             throw new Exception("이름이 없습니다");
         }
         return true;
-    }
-
-    //입금 내역 날짜 조회
-
-
-
-    //사용자별 입금 내역 조회
-    @Transactional
-    public List<String> GroupMemberPrice(HttpServletRequest req){
-        final String token = req.getHeader("userEmail");
-        String userEmail = jwtUtil.getUserEmail(token);
-        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-        jwtUtil.validateToken(token, administratorMember);
-        List<String> depositList = depositRepository.findSUMpriceBymember();
-        return depositRepository.findSUMpriceBymember();
     }
 
     //미납 내역 조회
