@@ -6,15 +6,18 @@ import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRe
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.deposit.Deposit_IsPay;
+import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.member.MemberRepository;
 import com.helpme.MembershipFee.web.dto.DepositFindSumGroupByMemberNameDto;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -81,12 +84,22 @@ public class DepositService {
 
     //미납 내역 조회
     @Transactional
-    public List<Deposit> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
+    public List<DepositReturn> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
         jwtUtil.validateToken(token, administratorMember);
         return depositRepository.findByIsPay(deposit_isPay);
+    }
+
+
+    //날짜 검색
+    public List<Object> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
+        final String token = req.getHeader("userEmail");
+        String userEmail = jwtUtil.getUserEmail(token);
+        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
+        jwtUtil.validateToken(token, administratorMember);
+        return depositRepository.findAllDateBetween(start, end);
     }
 
 }

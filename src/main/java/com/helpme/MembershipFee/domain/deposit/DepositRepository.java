@@ -1,12 +1,15 @@
 package com.helpme.MembershipFee.domain.deposit;
 
+import com.helpme.MembershipFee.domain.deposit.apireturn.DepositDateReturn;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface DepositRepository extends JpaRepository<Deposit, Long> {
     //총 입금 내역 조회
@@ -22,9 +25,13 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     List<DepositReturn> findBySavename(String name);
 
     //미납내역 조회 (전체)
-    List<Deposit> findByIsPay(Deposit_IsPay deposit_isPay);
+    List<DepositReturn> findByIsPay(Deposit_IsPay deposit_isPay);
 
     //Deposit 조회 + 페이징 처리
     Page<DepositReturn> findAllBy(Pageable pageable);
+
+    //날짜 검색
+    @Query("SELECT d.Idx_Deposit, d.savename, d.price, d.createdDate, d.isPay FROM Deposit d WHERE d.createdDate BETWEEN :start AND :end")
+    List<Object> findAllDateBetween(LocalDate start, LocalDate end);
 
 }
