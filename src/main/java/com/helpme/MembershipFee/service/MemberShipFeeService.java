@@ -7,6 +7,7 @@ import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFeeRepository;
+import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class MemberShipFeeService {
     }
 
     //날짜 검색
-    public List<Object> findByCreateDateBetween(HttpServletRequest req, String start, String end){
+    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, String start, String end){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);

@@ -26,7 +26,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     Page<DepositReturn> findAllBy(Pageable pageable);
 
     //날짜 검색
-    @Query("SELECT d.Idx_Deposit, d.savename, d.price, d.createdDate, d.isPay FROM Deposit d WHERE d.createdDate BETWEEN :start AND :end")
-    List<Object> findAllDateBetween(LocalDate start, LocalDate end);
-
+    @Query("SELECT d FROM Deposit d WHERE d.createdDate BETWEEN :start AND :end")
+    List<DepositDateReturn> findAllDateBetween(LocalDate start, LocalDate end);
 }

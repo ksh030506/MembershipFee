@@ -13,7 +13,7 @@ public interface MemberShipFeeRepository extends JpaRepository<MemberShipFee, Lo
     Page<MemberShipFeeReturn> findAllBy(Pageable pageable);
 
     //날짜 검색
-    @Query("SELECT m.Idx_Membership_Fee, m.purposeofuse, m.membershipfee, m.dateofuse FROM MemberShipFee m WHERE m.dateofuse BETWEEN :start AND :end")
-    List<Object> findAllDateBetween(String start, String end);
+    @Query("SELECT m FROM MemberShipFee m WHERE m.dateofuse BETWEEN :start AND :end")
+    List<MemberShipFeeReturn> findAllDateBetween(String start, String end);
 
 }

@@ -1,6 +1,8 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.Deposit_IsPay;
+import com.helpme.MembershipFee.domain.deposit.apireturn.DepositDateReturn;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.DepositService;
@@ -58,7 +60,7 @@ public class DepositController_v1 {
     //deposit 날짜 조회
     @ResponseBody
     @PostMapping("/createdate")
-    public List<Object> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end){
+    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end){
         return depositService.findByCreateDateBetween(req, start, end);
     }
 }

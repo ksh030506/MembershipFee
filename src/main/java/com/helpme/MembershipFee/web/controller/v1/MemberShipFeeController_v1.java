@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.service.MemberShipFeeService;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
@@ -38,7 +39,7 @@ public class MemberShipFeeController_v1 {
     //deposit 날짜 조회
     @ResponseBody
     @PostMapping("/memberdate")
-    public List<Object> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end){
+    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end){
         return memberShipFeeService.findByCreateDateBetween(req, start, end);
     }
 

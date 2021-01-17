@@ -5,10 +5,9 @@ import java.time.LocalDate;
 
 public interface DepositDateReturn {
 
-    Long getIdx_Deposit();
     String getSavename();
     int getPrice();
-    String getCreatedDate();
+    LocalDate getCreatedDate();
     String getIsPay();
 
 }

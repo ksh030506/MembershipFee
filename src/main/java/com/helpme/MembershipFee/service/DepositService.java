@@ -6,6 +6,7 @@ import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRe
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.deposit.Deposit_IsPay;
+import com.helpme.MembershipFee.domain.deposit.apireturn.DepositDateReturn;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.member.MemberRepository;
@@ -79,7 +80,7 @@ public class DepositService {
     }
 
     //날짜 검색
-    public List<Object> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
+    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
         AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
