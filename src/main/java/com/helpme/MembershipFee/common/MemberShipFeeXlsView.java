@@ -2,7 +2,10 @@ package com.helpme.MembershipFee.common;
 
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
-import org.apache.poi.hssf.usermodel.HSSFCell;
+import com.helpme.MembershipFee.domain.member.Member;
+import com.helpme.MembershipFee.domain.member.MemberRepository;
+import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
+import com.helpme.MembershipFee.domain.membershipfee.MemberShipFeeRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,16 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-@Component("depositXls")
-public class DepositXlsView extends AbstractXlsView {
+@Component("membershipfeeXls")
+public class MemberShipFeeXlsView extends AbstractXlsView {
+
 
     @Autowired
-    private DepositRepository depositRepository;
-
+    private MemberShipFeeRepository memberShipFeeRepository;
 
     @Override
     protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest req, HttpServletResponse res) throws Exception {
-        res.setHeader("Content-Disposition", "attachment; filename=\"deposit.xls\"");
+        res.setHeader("Content-Disposition", "attachment; filename=\"membershipfee.xls\"");
 
         CellStyle numberCellStyle = workbook.createCellStyle();
         DataFormat numberDataFormat = workbook.createDataFormat();
@@ -30,8 +33,7 @@ public class DepositXlsView extends AbstractXlsView {
 
         Sheet sheet = workbook.createSheet("deposit_sheet");
 
-        //엑셀 렌더링에 필요한 데이터를 모두 가지고 옵니다
-        List<Deposit> depositList = depositRepository.findAll();
+        List<MemberShipFee> memberShipFeeList = memberShipFeeRepository.findAll();
 
         // 헤더를 생성합니다
         int rowIndex = 0;
@@ -40,31 +42,29 @@ public class DepositXlsView extends AbstractXlsView {
         headerCell1.setCellValue("순번");
 
         Cell headerCell2 = headerRow.createCell(1);
-        headerCell2.setCellValue("이름");
+        headerCell2.setCellValue("사용 금액");
 
         Cell headerCell3 = headerRow.createCell(2);
-        headerCell3.setCellValue("회비");
+        headerCell3.setCellValue("사용 이유");
 
         Cell headerCell4 = headerRow.createCell(3);
-        headerCell4.setCellValue("날짜");
-
+        headerCell4.setCellValue("사용 날짜");
 
         //바이에 데이터를 넣어줍니다
-        for(Deposit deposit : depositList){
+        for(MemberShipFee memberShipFee : memberShipFeeList){
             Row bodyRow = sheet.createRow(rowIndex++);
 
             Cell bodyCell1 = bodyRow.createCell(0);
-            bodyCell1.setCellValue(deposit.getIdx_Deposit());
+            bodyCell1.setCellValue(memberShipFee.getIdx_Membership_Fee());
 
             Cell bodyCell2 = bodyRow.createCell(1);
-            bodyCell2.setCellValue(deposit.getSavename());
+            bodyCell2.setCellValue(memberShipFee.getMembershipfee());
 
             Cell bodyCell3 = bodyRow.createCell(2);
-            bodyCell3.setCellValue(deposit.getPrice());
+            bodyCell3.setCellValue(memberShipFee.getPurposeofuse());
 
-            //날짜 형식 바꾸기
             Cell bodyCell4 = bodyRow.createCell(3);
-            bodyCell4.setCellValue(deposit.getCreatedDate());
+            bodyCell4.setCellValue(memberShipFee.getDateofuse());
         }
     }
 }
