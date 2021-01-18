@@ -2,7 +2,6 @@ package com.helpme.MembershipFee.common;
 
 import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,6 @@ public class DepositXlsView extends AbstractXlsView {
     @Autowired
     private DepositRepository depositRepository;
 
-
     @Override
     protected void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest req, HttpServletResponse res) throws Exception {
         res.setHeader("Content-Disposition", "attachment; filename=\"deposit.xls\"");
@@ -30,10 +28,10 @@ public class DepositXlsView extends AbstractXlsView {
 
         Sheet sheet = workbook.createSheet("deposit_sheet");
 
-        //엑셀 렌더링에 필요한 데이터를 모두 가지고 옵니다
+        //엑셀 렌더링에 필요한 데이터
         List<Deposit> depositList = depositRepository.findAll();
 
-        // 헤더를 생성합니다
+        //헤더 생성
         int rowIndex = 0;
         Row headerRow = sheet.createRow(rowIndex++);
         Cell headerCell1 = headerRow.createCell(0);
@@ -49,7 +47,7 @@ public class DepositXlsView extends AbstractXlsView {
         headerCell4.setCellValue("날짜");
 
 
-        //바이에 데이터를 넣어줍니다
+        //엑셀 바디에 데이터 넣어주기
         for(Deposit deposit : depositList){
             Row bodyRow = sheet.createRow(rowIndex++);
 
@@ -62,7 +60,7 @@ public class DepositXlsView extends AbstractXlsView {
             Cell bodyCell3 = bodyRow.createCell(2);
             bodyCell3.setCellValue(deposit.getPrice());
 
-            //날짜 형식 바꾸기
+            //에러 => 날짜 형식
             Cell bodyCell4 = bodyRow.createCell(3);
             bodyCell4.setCellValue(deposit.getCreatedDate());
         }

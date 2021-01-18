@@ -8,6 +8,7 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     //이름을 기준으로 찾음(타입 : Member)
     Member findByMembername(String name);
+
     //단순 이름 조회
     List<nameReturn> findAllBy();
 }

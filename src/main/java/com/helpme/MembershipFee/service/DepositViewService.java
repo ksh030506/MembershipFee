@@ -28,18 +28,7 @@ public class DepositViewService {
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
 
-//    @Transactional(readOnly = true)
-//    public List<Deposit> findAll(HttpServletRequest req) throws Exception {
-//        final String token = jwtUtil.GetTokenByHeader(req);
-//        String userEmail = jwtUtil.getUserEmail(token);
-//        //토큰 검사를 위한 관리자 계정 찾기
-//        AdministratorMember administratorMember = administratorMemberRepository.findByEmail(userEmail);
-//        jwtUtil.validateToken(token, administratorMember);
-//        List<Deposit> depositList = depositRepository.findAll();
-//        if(depositList == null) throw new Exception("데이터가 없습니다.");
-//        return depositList;
-//    }
-
+    //입금 조회 + 페이징 처리
     @Transactional(readOnly = true)
     public Page<DepositReturn> findAllPage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -52,6 +41,7 @@ public class DepositViewService {
         return depositList;
     }
 
+    //입금 총액 조회
     @Transactional
     public Integer findSumPrice(HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -65,6 +55,7 @@ public class DepositViewService {
     }
 
 
+    //이름 조회
     @Transactional
     public List<DepositReturn> findName(DepositFindByNameDto depositFindByNameDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);

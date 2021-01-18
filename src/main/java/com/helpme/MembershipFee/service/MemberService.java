@@ -27,6 +27,7 @@ public class MemberService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    //회원 저장
     @Transactional
     public Long save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -52,6 +53,7 @@ public class MemberService {
         throw new Exception("이름 중복");
     }
 
+    //단순 이름 조회
     @Transactional
     public List<nameReturn> GetUserName(HttpServletRequest req){
         final String token = jwtUtil.GetTokenByHeader(req);

@@ -30,6 +30,7 @@ public class AdministratorMemberController_v1 {
     @Autowired
     private CookieUtil cookieUtil;
 
+    //회원가입 엔트포인트
     @RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, String> signUpUser(@RequestBody AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         //Json으로 보내기 위해 사용
@@ -44,6 +45,7 @@ public class AdministratorMemberController_v1 {
         return map;
     }
 
+    //로그인 엔드포인트
     @ResponseBody
     @PostMapping("/signin")
     public Map<String, String> loginUser(@RequestBody AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto, HttpServletRequest req, HttpServletResponse res) throws Exception {

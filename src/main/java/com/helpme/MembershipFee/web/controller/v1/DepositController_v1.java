@@ -28,6 +28,7 @@ public class DepositController_v1 {
     @Autowired
     private MemberService memberService;
 
+    //입금 엔트포인트
     @PostMapping("/adddeposit")
     public Map<String, String> AddDeposit(@RequestBody DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req){
         //Json으로 보내기 위해 사용
@@ -42,6 +43,7 @@ public class DepositController_v1 {
         return map;
     }
 
+    //단순 이름 조회 엔트포인트
     @ResponseBody
     @GetMapping("/pullusername")
     public List<nameReturn> PullUserName(HttpServletRequest req){
@@ -50,6 +52,7 @@ public class DepositController_v1 {
     }
 
 
+    //입금 여부 엔트포인트
     @ResponseBody
     @GetMapping("/ispay")
     public List<DepositReturn> findByIsPay(HttpServletRequest req) {
@@ -57,7 +60,7 @@ public class DepositController_v1 {
     }
 
 
-    //deposit 날짜 조회
+    //deposit 날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/createdate")
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end){

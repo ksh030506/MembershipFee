@@ -16,6 +16,7 @@ public class MemberController_v1 {
     @Autowired
     private MemberService memberService;
 
+    //회원 추가 엔트포인트
     @ResponseBody
     @PostMapping("/useradd")
     public Map<String, String> UserAdd(HttpServletRequest req, HttpServletResponse res, @RequestBody MemberSaveRequestDto memberSaveRequestDto) throws Exception {

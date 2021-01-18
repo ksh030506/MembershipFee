@@ -33,9 +33,10 @@ public class MemberShipFeeXlsView extends AbstractXlsView {
 
         Sheet sheet = workbook.createSheet("deposit_sheet");
 
+        //엑셀 렌더링에 필요한 데이터
         List<MemberShipFee> memberShipFeeList = memberShipFeeRepository.findAll();
 
-        // 헤더를 생성합니다
+        //헤더 생성
         int rowIndex = 0;
         Row headerRow = sheet.createRow(rowIndex++);
         Cell headerCell1 = headerRow.createCell(0);
@@ -50,7 +51,7 @@ public class MemberShipFeeXlsView extends AbstractXlsView {
         Cell headerCell4 = headerRow.createCell(3);
         headerCell4.setCellValue("사용 날짜");
 
-        //바이에 데이터를 넣어줍니다
+        //엑셀 바디에 데이터 넣어주기
         for(MemberShipFee memberShipFee : memberShipFeeList){
             Row bodyRow = sheet.createRow(rowIndex++);
 

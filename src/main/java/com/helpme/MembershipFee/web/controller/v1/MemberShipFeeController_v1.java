@@ -22,6 +22,7 @@ public class MemberShipFeeController_v1 {
     @Autowired
     private MemberShipFeeService memberShipFeeService;
 
+    //회비 사용 내역 저장 엔트포인트
     @PostMapping("/membershipadd")
     public Map<String, String> UserAdd(HttpServletRequest req, @RequestBody MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto) throws Exception {
         //Json으로 보내기 위해 사용
@@ -36,7 +37,7 @@ public class MemberShipFeeController_v1 {
         return map;
     }
 
-    //deposit 날짜 조회
+    //deposit 날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/memberdate")
     public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end){

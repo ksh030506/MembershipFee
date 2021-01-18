@@ -7,7 +7,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
-import java.util.Date;
 
 //부모 클래스로 만들어 모든 파일에 상속
 @MappedSuperclass

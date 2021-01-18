@@ -27,6 +27,7 @@ public class MemberShipFeeViewService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    //입금 사용 내역 조회 + 페이징
     @Transactional
     public Page<MemberShipFeeReturn> findMemberSipFeepage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);

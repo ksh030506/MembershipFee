@@ -29,12 +29,14 @@ public class DepositViewController_v1 {
     @Autowired
     private MemberService memberService;
 
+    //입금 조회 엔트포인트
     @ResponseBody
     @GetMapping("/depositlist")
     public Page<DepositReturn> findAll(HttpServletRequest req, final Pageable pageable) throws Exception {
         return depositViewService.findAllPage(req, pageable);
     }
 
+    //입금 총액 조회 엔트포인트
     @ResponseBody
     @GetMapping("/sumprice")
     public Map<String, Integer> findPrice(HttpServletRequest req) throws Exception {
@@ -44,6 +46,7 @@ public class DepositViewController_v1 {
         return map;
     }
 
+    //이름 조회 엔트포인트
     @ResponseBody
     @PostMapping("/findusername")
     public List<DepositReturn> findBySavename(@RequestBody DepositFindByNameDto depositFindByNameDto, HttpServletRequest req) throws Exception {

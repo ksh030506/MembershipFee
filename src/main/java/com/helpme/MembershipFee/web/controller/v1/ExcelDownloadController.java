@@ -20,6 +20,7 @@ public class ExcelDownloadController {
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
 
+    //Deposit 엑셀 다운로드 엔트포인트
     @GetMapping(path="/download/deposit", produces = "application/vnd.ms-excel")
     public String DepositExcelDownload(HttpServletRequest req){
           //현재 API만 구현되어있기때문에 사용자 인증은 주석처리
@@ -30,6 +31,7 @@ public class ExcelDownloadController {
         return "depositXls";
     }
 
+    //MemberShipFee 엑셀 다운로드 엔트포인트
     @GetMapping(path = "/download/membershipfee", produces = "application/vnd.ms-excel")
     public String MemberShipFeeExcelDownload(HttpServletRequest req){
           //현재 API만 구현되어있기때문에 사용자 인증은 주석처리

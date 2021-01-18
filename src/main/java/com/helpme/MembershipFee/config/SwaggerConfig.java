@@ -43,7 +43,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .groupName(version)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.helpme.MembershipFee.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.helpme.MembershipFee.web.controller.v1"))
                 .paths(PathSelectors.ant("/api/v1/**"))
                 .build()
                 .apiInfo(apiInfo(title, version));

@@ -3,11 +3,8 @@ package com.helpme.MembershipFee.domain.membershipfee;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

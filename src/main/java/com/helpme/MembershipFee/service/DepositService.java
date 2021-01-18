@@ -10,18 +10,14 @@ import com.helpme.MembershipFee.domain.deposit.apireturn.DepositDateReturn;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.member.MemberRepository;
-import com.helpme.MembershipFee.web.dto.DepositFindSumGroupByMemberNameDto;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DepositService {
@@ -38,6 +34,7 @@ public class DepositService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    //입금 저장
     @Transactional
     public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = req.getHeader("userEmail");
@@ -79,7 +76,7 @@ public class DepositService {
         return depositRepository.findByIsPay(deposit_isPay);
     }
 
-    //날짜 검색
+    //입금 날짜 검색
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);

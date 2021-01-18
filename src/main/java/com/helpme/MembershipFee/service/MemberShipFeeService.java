@@ -32,6 +32,7 @@ public class MemberShipFeeService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    //입금 사용 내역 조회
     @Transactional
     public Long save(MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
