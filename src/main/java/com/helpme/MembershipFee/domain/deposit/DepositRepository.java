@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public interface DepositRepository extends JpaRepository<Deposit, Long> {
     //총 입금 내역 조회
