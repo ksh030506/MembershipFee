@@ -46,7 +46,7 @@ public class DepositController_v1 {
     //단순 이름 조회 엔트포인트
     @ResponseBody
     @GetMapping("/pullusername")
-    public List<nameReturn> PullUserName(HttpServletRequest req){
+    public List<nameReturn> PullUserName(HttpServletRequest req) throws Exception {
         List<nameReturn> members = memberService.GetUserName(req);
         return members;
     }
@@ -55,7 +55,7 @@ public class DepositController_v1 {
     //입금 여부 엔트포인트
     @ResponseBody
     @GetMapping("/ispay")
-    public List<DepositReturn> findByIsPay(HttpServletRequest req) {
+    public List<DepositReturn> findByIsPay(HttpServletRequest req) throws Exception {
         return depositService.findByIsPay(Deposit_IsPay.NO_PAY, req);
     }
 
@@ -63,7 +63,7 @@ public class DepositController_v1 {
     //deposit 날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/createdate")
-    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end){
+    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) throws Exception {
         return depositService.findByCreateDateBetween(req, start, end);
     }
 }

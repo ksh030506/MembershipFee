@@ -17,6 +17,7 @@ import java.util.Date;
 public class JwtUtil {
 
     final static public String ACCESS_TOKEN_NAME = "accessToken";
+    private int tokenValidMilisecond = 1000 * 60 * 60 * 24;
 
     //secret 가져오기
     @Value("${spring.jwt.secret}")
@@ -55,9 +56,10 @@ public class JwtUtil {
     public String doGenerateToken(String userEmail){
         Claims claims = Jwts.claims();
         claims.put("userEmail", userEmail);
-
+        Date now = new Date();
         String jwt = Jwts.builder()
                 .setClaims(claims)
+                .setExpiration(new Date(now.getTime() + tokenValidMilisecond))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .signWith(getSigningKey(SECRET_KEY), SignatureAlgorithm.HS256)
                 .compact();

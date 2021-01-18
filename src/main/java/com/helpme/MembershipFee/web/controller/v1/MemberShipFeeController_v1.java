@@ -40,7 +40,7 @@ public class MemberShipFeeController_v1 {
     //deposit 날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/memberdate")
-    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end){
+    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end) throws Exception {
         return memberShipFeeService.findByCreateDateBetween(req, start, end);
     }
 

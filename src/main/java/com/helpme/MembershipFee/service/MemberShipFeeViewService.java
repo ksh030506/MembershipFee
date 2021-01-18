@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.service;
 
+import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class MemberShipFeeViewService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
 
     //입금 사용 내역 조회 + 페이징
     @Transactional
