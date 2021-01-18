@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원 추가</title>
+    </head>
+    <body>
+        <h1>회원 추가</h1>
+        <form action="/api/v2/useradd" method="POST">
+            <p>이름 : <input type="text" id="name" name="name" th:name="name"></p>
+            <p>생년월일 : <input type="text" id="birth" name="birth" th:name="birth"></p>
+            <button type="submit">회원 저장</button>
+        </form>
+    </body>
+</html>
