@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.deposit;
 
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class DepositService {
+public class DepositServiceImpl implements DepositService{
 
     @Autowired
     private DepositRepository depositRepository;
@@ -36,6 +36,7 @@ public class DepositService {
 
     //입금 저장
     @Transactional
+    @Override
     public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
@@ -68,6 +69,7 @@ public class DepositService {
 
     //미납 내역 조회
     @Transactional
+    @Override
     public List<DepositReturn> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);
@@ -77,6 +79,8 @@ public class DepositService {
     }
 
     //입금 날짜 검색
+    @Transactional
+    @Override
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);

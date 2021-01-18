@@ -1,6 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
-import com.helpme.MembershipFee.service.MemberService;
+import com.helpme.MembershipFee.service.member.MemberService;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

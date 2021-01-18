@@ -1,10 +1,9 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.memberShipFee;
 
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
-import com.helpme.MembershipFee.domain.member.Member;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFeeRepository;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
@@ -14,11 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class MemberShipFeeService {
+public class MemberShipFeeServiceImpl implements MemberShipFeeService {
 
     @Autowired
     private MemberShipFeeRepository memberShipFeeRepository;
@@ -34,6 +32,7 @@ public class MemberShipFeeService {
 
     //입금 사용 내역 조회
     @Transactional
+    @Override
     public Long save(MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
@@ -59,6 +58,8 @@ public class MemberShipFeeService {
     }
 
     //날짜 검색
+    @Transactional
+    @Override
     public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, String start, String end){
         final String token = req.getHeader("userEmail");
         String userEmail = jwtUtil.getUserEmail(token);

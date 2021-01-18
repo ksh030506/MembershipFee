@@ -3,7 +3,7 @@ package com.helpme.MembershipFee.web.controller.v1;
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
-import com.helpme.MembershipFee.service.AdministratorMemberService;
+import com.helpme.MembershipFee.service.administratorMember.AdministratorMemberService;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberSaveRequestDto;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.member;
 
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
-public class MemberService {
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
@@ -30,6 +30,7 @@ public class MemberService {
 
     //회원 저장
     @Transactional
+    @Override
     public Long save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
@@ -56,6 +57,7 @@ public class MemberService {
 
     //단순 이름 조회
     @Transactional
+    @Override
     public List<nameReturn> GetUserName(HttpServletRequest req){
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);

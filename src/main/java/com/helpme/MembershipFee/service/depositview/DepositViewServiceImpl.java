@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.depositview;
 
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
-public class DepositViewService {
+public class DepositViewServiceImpl implements DepositViewService {
 
     @Autowired
     private DepositRepository depositRepository;
@@ -31,6 +31,7 @@ public class DepositViewService {
 
     //입금 조회 + 페이징 처리
     @Transactional(readOnly = true)
+    @Override
     public Page<DepositReturn> findAllPage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
@@ -44,6 +45,7 @@ public class DepositViewService {
 
     //입금 총액 조회
     @Transactional
+    @Override
     public Integer findSumPrice(HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
@@ -58,6 +60,7 @@ public class DepositViewService {
 
     //이름 조회
     @Transactional
+    @Override
     public List<DepositReturn> findName(DepositFindByNameDto depositFindByNameDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);

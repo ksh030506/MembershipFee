@@ -2,14 +2,13 @@ package com.helpme.MembershipFee.web.controller.v1;
 
 
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
-import com.helpme.MembershipFee.service.MemberShipFeeViewService;
+import com.helpme.MembershipFee.service.memberShipFeeView.MemberShipFeeViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RequestMapping("/api/v1")
 @RestController

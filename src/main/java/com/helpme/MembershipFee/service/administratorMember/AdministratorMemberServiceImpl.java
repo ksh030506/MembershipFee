@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.administratorMember;
 
 import com.helpme.MembershipFee.common.PasswordEncoding;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
@@ -15,11 +15,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class AdministratorMemberService {
+public class AdministratorMemberServiceImpl implements AdministratorMemberService{
 
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
 
+    @Override
     @Transactional
     public Long save(AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         if(!checkEmail(administratorMemberSaveRequestDto.getEmail())){
@@ -92,6 +93,8 @@ public class AdministratorMemberService {
         return err;
     }
 
+
+    @Override
     @Transactional
     public AdministratorMember findByEmail(AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto) throws Exception {
         PasswordEncoder passwordEncoder = new PasswordEncoding();

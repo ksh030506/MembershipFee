@@ -1,10 +1,9 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
-import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
-import com.helpme.MembershipFee.service.DepositViewService;
-import com.helpme.MembershipFee.service.MemberService;
+import com.helpme.MembershipFee.service.depositview.DepositViewService;
+import com.helpme.MembershipFee.service.member.MemberServiceImpl;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +26,7 @@ public class DepositViewController_v1 {
     private DepositRepository depositRepository;
 
     @Autowired
-    private MemberService memberService;
+    private MemberServiceImpl memberService;
 
     //입금 조회 엔트포인트
     @ResponseBody

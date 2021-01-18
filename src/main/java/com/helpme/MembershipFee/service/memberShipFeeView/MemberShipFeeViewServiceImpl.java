@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.service;
+package com.helpme.MembershipFee.service.memberShipFeeView;
 
 import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
-public class MemberShipFeeViewService {
+public class MemberShipFeeViewServiceImpl implements MemberShipFeeViewService {
 
     @Autowired
     private MemberShipFeeRepository memberShipFeeRepository;
@@ -32,6 +32,7 @@ public class MemberShipFeeViewService {
 
     //입금 사용 내역 조회 + 페이징
     @Transactional
+    @Override
     public Page<MemberShipFeeReturn> findMemberSipFeepage(HttpServletRequest req, final Pageable pageable) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
         String userEmail = jwtUtil.getUserEmail(token);
