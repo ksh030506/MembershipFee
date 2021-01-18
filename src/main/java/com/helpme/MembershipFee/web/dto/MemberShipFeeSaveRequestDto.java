@@ -12,6 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//회비 사용 내역 클래스 DTO(데이터 교환)
 public class MemberShipFeeSaveRequestDto {
 
     String pattern = "yyyy-MM-dd";
