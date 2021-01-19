@@ -6,11 +6,6 @@ branches:
   only:
     - main
 
-# Travis CI 서버의 Home
-cache:
-  directories:
-    - $HOME/.m2
-
 
 before_deploy:
   - zip -r membershipfee *
