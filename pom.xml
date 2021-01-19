@@ -15,7 +15,7 @@
 	<description>HelpMe 수행과제(회비 관리 시스템)입니다.</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>
