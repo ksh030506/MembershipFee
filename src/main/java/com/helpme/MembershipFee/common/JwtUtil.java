@@ -27,7 +27,7 @@ public class JwtUtil {
     private Key getSigningKey(String secretKey){
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
-    }
+    } 
 
     public Claims extractAllClaims(String token) throws ExpiredJwtException {
         return Jwts.parserBuilder()
