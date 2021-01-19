@@ -75,7 +75,7 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
     //이름 중복 검사
     public Boolean checkName(String name){
         Optional<AdministratorMember> member = administratorMemberRepository.findByName(name);
-        if(member.isEmpty()){
+        if(member == null){
             return true;
         }
         return false;
