@@ -6,6 +6,12 @@ branches:
   only:
     - main
 
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/./mvnw compile'
+
 before_install:
   - chmod +x mvnw
 
