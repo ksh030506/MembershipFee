@@ -1,0 +1,18 @@
+language: java
+jdk:
+  - openjdk8
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.mvnw'
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - llmm030506@gmail.com
