@@ -2,5 +2,19 @@ language: java
 jdk:
   - openjdk8
 
+branches:
+  only:
+    - master
+
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - $HOME/.m2
+
 before_install:
   - chmod +x mvnw
+
+notifications:
+  email:
+    recipients:
+      - llmm030506@gmail.com
