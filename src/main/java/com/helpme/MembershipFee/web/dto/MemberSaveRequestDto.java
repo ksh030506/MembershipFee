@@ -9,7 +9,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 //회원 저장 클래스 DTO(데이터 교환)
 public class MemberSaveRequestDto {
 
