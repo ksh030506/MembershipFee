@@ -4,7 +4,6 @@ import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.service.memberShipFee.MemberShipFeeService;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 @RestController
 public class MemberShipFeeController_v1 {

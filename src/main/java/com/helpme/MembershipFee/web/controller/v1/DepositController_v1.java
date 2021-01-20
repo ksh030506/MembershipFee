@@ -8,7 +8,6 @@ import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.deposit.DepositService;
 import com.helpme.MembershipFee.service.member.MemberServiceImpl;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
 public class DepositController_v1 {

@@ -6,7 +6,6 @@ import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.service.depositview.DepositViewService;
 import com.helpme.MembershipFee.service.member.MemberServiceImpl;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 @RestController
 public class DepositViewController_v1 {

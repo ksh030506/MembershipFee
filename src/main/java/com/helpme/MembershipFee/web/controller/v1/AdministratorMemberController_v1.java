@@ -6,7 +6,6 @@ import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.service.administratorMember.AdministratorMemberService;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberLoginRequestDto;
 import com.helpme.MembershipFee.web.dto.AdministratorMemberSaveRequestDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
 public class AdministratorMemberController_v1 {
