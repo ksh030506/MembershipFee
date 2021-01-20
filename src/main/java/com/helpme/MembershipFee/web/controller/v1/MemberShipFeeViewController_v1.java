@@ -25,7 +25,7 @@ public class MemberShipFeeViewController_v1 {
 
     //회비 사용 내역 조회 엔트포인트
     @ResponseBody
-    @GetMapping("/getmembershipfee")
+    @GetMapping("/membershipfeelist")
     public Page<MemberShipFeeReturn> findAll(HttpServletRequest req, Pageable pageable) throws Exception {
         cookieUtil.getCookie(req, "accessToken");
         return memberShipFeeViewService.findMemberSipFeepage(req, pageable);

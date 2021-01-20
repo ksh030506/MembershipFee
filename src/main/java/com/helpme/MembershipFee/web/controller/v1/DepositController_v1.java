@@ -71,7 +71,7 @@ public class DepositController_v1 {
 
     //날짜 조회 엔트포인트
     @ResponseBody
-    @PostMapping("/createdate")
+    @PostMapping("/depositdate")
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
                                                            @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) throws Exception {
         cookieUtil.getCookie(req, "accessToken");
