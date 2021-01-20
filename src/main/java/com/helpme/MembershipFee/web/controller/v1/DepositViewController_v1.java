@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.service.depositview.DepositViewService;
@@ -30,10 +31,14 @@ public class DepositViewController_v1 {
     @Autowired
     private MemberServiceImpl memberService;
 
+    @Autowired
+    private CookieUtil cookieUtil;
+
     //입금 조회 엔트포인트
     @ResponseBody
     @GetMapping("/depositlist")
     public Page<DepositReturn> findAll(HttpServletRequest req, final Pageable pageable) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         return depositViewService.findAllPage(req, pageable);
     }
 
@@ -41,6 +46,7 @@ public class DepositViewController_v1 {
     @ResponseBody
     @GetMapping("/sumprice")
     public Map<String, Integer> findPrice(HttpServletRequest req) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         Map<String, Integer> map = new HashMap<>();
         Integer sum = depositViewService.findSumPrice(req);
         map.put("sum", sum);
@@ -51,6 +57,7 @@ public class DepositViewController_v1 {
     @ResponseBody
     @PostMapping("/findusername")
     public List<DepositReturn> findBySavename(@RequestBody DepositFindByNameDto depositFindByNameDto, HttpServletRequest req) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         return depositViewService.findName(depositFindByNameDto, req);
     }
 }

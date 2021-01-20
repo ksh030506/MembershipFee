@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.service.member.MemberService;
 import com.helpme.MembershipFee.web.dto.MemberSaveRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,14 @@ public class MemberController_v1 {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private CookieUtil cookieUtil;
+
     //회원 추가 엔트포인트
     @ResponseBody
     @PostMapping("/useradd")
     public Map<String, String> UserAdd(HttpServletRequest req, HttpServletResponse res, @RequestBody MemberSaveRequestDto memberSaveRequestDto) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         //Json으로 보내기 위해 사용
         Map<String, String> map = new HashMap<>();
         try {

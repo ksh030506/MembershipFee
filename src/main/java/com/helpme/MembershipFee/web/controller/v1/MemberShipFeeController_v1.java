@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.service.memberShipFee.MemberShipFeeService;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
@@ -20,10 +21,14 @@ public class MemberShipFeeController_v1 {
     @Autowired
     private MemberShipFeeService memberShipFeeService;
 
+    @Autowired
+    private CookieUtil cookieUtil;
+
     //회비 사용 내역 저장 엔트포인트
     @ResponseBody
     @PostMapping("/membershipadd")
     public Map<String, String> UserAdd(HttpServletRequest req, @RequestBody MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         //Json으로 보내기 위해 사용
         Map<String, String> map = new HashMap<>();
         try {
@@ -39,7 +44,9 @@ public class MemberShipFeeController_v1 {
     //날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/memberdate")
-    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end) throws Exception {
+    public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start,
+                                                             @RequestParam("end") String end) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         return memberShipFeeService.findByCreateDateBetween(req, start, end);
     }
 

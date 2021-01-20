@@ -1,5 +1,6 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
+import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.domain.deposit.Deposit_IsPay;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositDateReturn;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
@@ -29,10 +30,14 @@ public class DepositController_v1 {
     @Autowired
     private MemberServiceImpl memberService;
 
+    @Autowired
+    private CookieUtil cookieUtil;
+
     //입금 엔트포인트
     @ResponseBody
     @PostMapping("/adddeposit")
-    public Map<String, String> AddDeposit(@RequestBody DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req){
+    public Map<String, String> AddDeposit(@RequestBody DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         //Json으로 보내기 위해 사용
         Map<String, String> map = new HashMap<>();
         try {
@@ -49,6 +54,7 @@ public class DepositController_v1 {
     @ResponseBody
     @GetMapping("/pullusername")
     public List<nameReturn> PullUserName(HttpServletRequest req) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         List<nameReturn> members = memberService.GetUserName(req);
         return members;
     }
@@ -58,6 +64,7 @@ public class DepositController_v1 {
     @ResponseBody
     @GetMapping("/ispay")
     public List<DepositReturn> findByIsPay(HttpServletRequest req) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         return depositService.findByIsPay(Deposit_IsPay.NO_PAY, req);
     }
 
@@ -65,7 +72,9 @@ public class DepositController_v1 {
     //날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/createdate")
-    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) throws Exception {
+    public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
+                                                           @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) throws Exception {
+        cookieUtil.getCookie(req, "accessToken");
         return depositService.findByCreateDateBetween(req, start, end);
     }
 }
