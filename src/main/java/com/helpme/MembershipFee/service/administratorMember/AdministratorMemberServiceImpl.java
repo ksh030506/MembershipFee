@@ -48,7 +48,6 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
     //이름 중복 검사
     public boolean checkName(String name) throws Exception {
         AdministratorMember member = administratorMemberRepository.findByName(name);
-        System.out.println(member);
         if(member != null){
             throw new Exception("이름 중복");
         }
