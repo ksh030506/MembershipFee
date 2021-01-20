@@ -20,11 +20,11 @@ public class SwaggerConfig {
     private String version;
     private String title;
 
-    //API 정보
+    //API 정보 구성
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,
-                "Swagger로 생성한 API Docs",
+                "MemberShipFee_HelpMe",
                 version,
                 "www.membershipfee.com",
                 new Contact("김상현", "", "sanghyeon030506@gmail.com"),

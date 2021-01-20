@@ -1,11 +1,11 @@
 package com.helpme.MembershipFee.common;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-@Service
+@Component
 //쿠키 생성 및 조회 클래스
 public class CookieUtil {
 
@@ -32,7 +32,7 @@ public class CookieUtil {
     //쿠키 값 조회
     public String getCookieValue(HttpServletRequest req, String cookieName) throws Exception {
         final Cookie[] cookies = req.getCookies();
-        if(cookies == null) throw new Exception("로그인 해주세요");
+        if(cookies == null) return null;
         for(Cookie cookie : cookies){
             if(cookie.getName().equals(cookieName))
                 return cookie.getValue();
