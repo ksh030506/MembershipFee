@@ -8,6 +8,5 @@ public interface AdministratorMemberRepository extends JpaRepository<Administrat
     AdministratorMember findByEmail(String email);
 
     //이름을 기준으로 찾음(타입 : AdministratorMember)
-    Optional<AdministratorMember> findByName(String name);
-    //Optional => 조건이 맞다/아니다로 나올 때 사용
+    AdministratorMember findByName(String name);
 }

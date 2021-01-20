@@ -23,15 +23,12 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
     @Override
     @Transactional
     public Long save(AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
-        if(!checkEmail(administratorMemberSaveRequestDto.getEmail())){
-            throw new Exception("이메일 중복");
-        } else if(!isValidEmail(administratorMemberSaveRequestDto.getEmail())){
-            throw new Exception("이메일 형식을 지켜주세요");
-        } else if(!checkName(administratorMemberSaveRequestDto.getName())){
-            throw new Exception("이름 중복");
-        }
-        //비밀번호 검사
-        //chekPassword(administratorMemberSaveRequestDto.getPassword());
+        //이메일 형식 검사
+        isValidEmail(administratorMemberSaveRequestDto.getEmail());
+        //이메일 중복 검사
+        checkEmail(administratorMemberSaveRequestDto.getEmail());
+        //이름 중복 검사
+        checkName(administratorMemberSaveRequestDto.getName());
         //비밀번호 암호화
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         String newPassword1 = passwordEncoder.encode(administratorMemberSaveRequestDto.getPassword());
@@ -39,58 +36,34 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
         return administratorMemberRepository.save(administratorMemberSaveRequestDto.toEntity()).getIdx_Admin();
     }
 
-    //비밀번호 검사
-    public Boolean chekPassword(String password) throws Exception {
-        if(password.length() >= 10){
-            //영어 대문자, 소문자, 숫자, 특수문자 중 2종류 조합(정규식)
-            String regex = "";
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(password);
-            if(!m.matches()) {
-                throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 2종류를 조합하여 사용해주세요");
-            }
-        } else if(password.length() < 10 && password.length() >= 8){
-            //영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합(정규식)
-            String regex = "";
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(password);
-            if(!m.matches()) {
-                throw new Exception("영어 대문자, 소문자, 숫자, 특수문자 중 3종류를 조합하여 사용해주세요");
-            }
-        } else if(password.length() < 8){
-            throw new Exception("비밀번호는 8자리 이상작성해 주세요");
+    //이메일 중복 검사
+    public boolean checkEmail(String email) throws Exception {
+        AdministratorMember member = administratorMemberRepository.findByEmail(email);
+        if(member != null){
+            throw new Exception("이메일 중복");
         }
         return true;
     }
 
-    //이메일 중복 검사
-    public Boolean checkEmail(String email){
-        AdministratorMember member = administratorMemberRepository.findByEmail(email);
-        if(member == null){
-            return true;
-        }
-        return false;
-    }
-
     //이름 중복 검사
-    public Boolean checkName(String name){
-        Optional<AdministratorMember> member = administratorMemberRepository.findByName(name);
-        if(member == null){
-            return true;
+    public boolean checkName(String name) throws Exception {
+        AdministratorMember member = administratorMemberRepository.findByName(name);
+        System.out.println(member);
+        if(member != null){
+            throw new Exception("이름 중복");
         }
-        return false;
+        return true;
     }
 
     //이메일 형식 검사
-    public boolean isValidEmail(String email) {
-        boolean err = false;
+    public boolean isValidEmail(String email) throws Exception {
         String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(email);
-        if(m.matches()) {
-            err = true;
+        if(!m.matches()) {
+            throw new Exception("이메일 형식을 지켜주세요");
         }
-        return err;
+        return true;
     }
 
 
