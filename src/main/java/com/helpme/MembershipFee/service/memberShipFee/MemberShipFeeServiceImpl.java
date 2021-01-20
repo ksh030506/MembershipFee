@@ -30,8 +30,7 @@ public class MemberShipFeeServiceImpl implements MemberShipFeeService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    //입금 사용 내역 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Long save(MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -57,8 +56,7 @@ public class MemberShipFeeServiceImpl implements MemberShipFeeService {
         return true;
     }
 
-    //날짜 검색
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, String start, String end){
         final String token = req.getHeader("userEmail");

@@ -1,10 +1,8 @@
 package com.helpme.MembershipFee.service.depositview;
 
-import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
-import com.helpme.MembershipFee.domain.deposit.Deposit;
 import com.helpme.MembershipFee.domain.deposit.DepositRepository;
 import com.helpme.MembershipFee.domain.deposit.apireturn.DepositReturn;
 import com.helpme.MembershipFee.web.dto.DepositFindByNameDto;
@@ -29,7 +27,6 @@ public class DepositViewServiceImpl implements DepositViewService {
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
 
-    //입금 조회 + 페이징 처리
     @Transactional(readOnly = true)
     @Override
     public Page<DepositReturn> findAllPage(HttpServletRequest req, final Pageable pageable) throws Exception {
@@ -43,8 +40,7 @@ public class DepositViewServiceImpl implements DepositViewService {
         return depositList;
     }
 
-    //입금 총액 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Integer findSumPrice(HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -57,9 +53,7 @@ public class DepositViewServiceImpl implements DepositViewService {
         return priceSum;
     }
 
-
-    //이름 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<DepositReturn> findName(DepositFindByNameDto depositFindByNameDto, HttpServletRequest req) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -71,5 +65,4 @@ public class DepositViewServiceImpl implements DepositViewService {
         if(depositList.isEmpty()) throw new Exception("데이터가 없습니다.");
         return depositList;
     }
-
 }

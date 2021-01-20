@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface MemberShipFeeViewService {
 
+    //회비 사용 내역 조회 + 페이징 처리
     Page<MemberShipFeeReturn> findMemberSipFeepage(HttpServletRequest req, final Pageable pageable) throws Exception;
 
 }

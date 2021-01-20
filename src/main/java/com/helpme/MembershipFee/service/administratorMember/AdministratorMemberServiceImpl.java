@@ -21,7 +21,6 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
     private AdministratorMemberRepository administratorMemberRepository;
 
     @Override
-    @Transactional
     public Long save(AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         //이메일 형식 검사
         isValidEmail(administratorMemberSaveRequestDto.getEmail());
@@ -67,7 +66,6 @@ public class AdministratorMemberServiceImpl implements AdministratorMemberServic
 
 
     @Override
-    @Transactional
     public AdministratorMember findByEmail(AdministratorMemberLoginRequestDto administratorMemberLoginRequestDto) throws Exception {
         PasswordEncoder passwordEncoder = new PasswordEncoding();
         AdministratorMember member = administratorMemberRepository.findByEmail(administratorMemberLoginRequestDto.getEmail());

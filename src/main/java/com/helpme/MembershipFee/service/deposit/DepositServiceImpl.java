@@ -34,8 +34,6 @@ public class DepositServiceImpl implements DepositService{
     @Autowired
     private JwtUtil jwtUtil;
 
-    //입금 저장
-    @Transactional
     @Override
     public Long save(DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req) throws Exception {
         final String token = req.getHeader("userEmail");
@@ -58,7 +56,6 @@ public class DepositServiceImpl implements DepositService{
         return depositRepository.save(deposit).getIdx_Deposit();
     }
 
-    //이름 검색
     public Boolean findByName(String name) throws Exception {
         Member member = memberRepository.findByMembername(name);
         if(member == null){
@@ -67,8 +64,7 @@ public class DepositServiceImpl implements DepositService{
         return true;
     }
 
-    //미납 내역 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<DepositReturn> findByIsPay(Deposit_IsPay deposit_isPay, HttpServletRequest req){
         final String token = req.getHeader("userEmail");
@@ -78,8 +74,7 @@ public class DepositServiceImpl implements DepositService{
         return depositRepository.findByIsPay(deposit_isPay);
     }
 
-    //입금 날짜 검색
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, LocalDate start, LocalDate end){
         final String token = req.getHeader("userEmail");

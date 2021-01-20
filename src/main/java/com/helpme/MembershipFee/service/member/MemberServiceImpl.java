@@ -1,6 +1,5 @@
 package com.helpme.MembershipFee.service.member;
 
-import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
@@ -28,8 +27,6 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    //회원 저장
-    @Transactional
     @Override
     public Long save(HttpServletRequest req, HttpServletResponse res, MemberSaveRequestDto memberSaveRequestDto) throws Exception {
         final String token = jwtUtil.GetTokenByHeader(req);
@@ -55,8 +52,7 @@ public class MemberServiceImpl implements MemberService {
         throw new Exception("이름 중복");
     }
 
-    //단순 이름 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<nameReturn> GetUserName(HttpServletRequest req){
         final String token = jwtUtil.GetTokenByHeader(req);
