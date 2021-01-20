@@ -3,6 +3,7 @@ package com.helpme.MembershipFee.web.controller.v1;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import com.helpme.MembershipFee.service.memberShipFee.MemberShipFeeService;
 import com.helpme.MembershipFee.web.dto.MemberShipFeeSaveRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 @RestController
 public class MemberShipFeeController_v1 {
@@ -19,6 +21,7 @@ public class MemberShipFeeController_v1 {
     private MemberShipFeeService memberShipFeeService;
 
     //회비 사용 내역 저장 엔트포인트
+    @ResponseBody
     @PostMapping("/membershipadd")
     public Map<String, String> UserAdd(HttpServletRequest req, @RequestBody MemberShipFeeSaveRequestDto memberShipFeeSaveRequestDto) throws Exception {
         //Json으로 보내기 위해 사용
@@ -33,7 +36,7 @@ public class MemberShipFeeController_v1 {
         return map;
     }
 
-    //deposit 날짜 조회 엔트포인트
+    //날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/memberdate")
     public List<MemberShipFeeReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start") String start, @RequestParam("end") String end) throws Exception {

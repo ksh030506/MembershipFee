@@ -31,6 +31,7 @@ public class AdministratorMemberController_v1 {
     private CookieUtil cookieUtil;
 
     //회원가입 엔트포인트
+    @ResponseBody
     @RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, String> signUpUser(@RequestBody AdministratorMemberSaveRequestDto administratorMemberSaveRequestDto) throws Exception {
         //Json으로 보내기 위해 사용
@@ -62,10 +63,6 @@ public class AdministratorMemberController_v1 {
                 Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token);
                 res.addCookie(accessToken);
 
-                //사용자 이메일 저장
-                //Cookie UserEmail = cookieUtil.createCookie("UserEmail", member.getEmail());
-                //res.addCookie(UserEmail);
-
                 map.put("msg", "로그인 성공");
                 map.put("email", member.getEmail());
                 map.put("Authorization",token);
@@ -77,6 +74,7 @@ public class AdministratorMemberController_v1 {
         return map;
     }
 
+    //로그아웃 엔드포인트
     @ResponseBody
     @GetMapping("/logout")
     public Map<String, String> logout(HttpServletResponse res){

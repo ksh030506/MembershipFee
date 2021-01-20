@@ -1,10 +1,8 @@
 package com.helpme.MembershipFee.service.memberShipFeeView;
 
-import com.helpme.MembershipFee.common.CookieUtil;
 import com.helpme.MembershipFee.common.JwtUtil;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
-import com.helpme.MembershipFee.domain.membershipfee.MemberShipFee;
 import com.helpme.MembershipFee.domain.membershipfee.MemberShipFeeRepository;
 import com.helpme.MembershipFee.domain.membershipfee.apireturn.MemberShipFeeReturn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Service
 public class MemberShipFeeViewServiceImpl implements MemberShipFeeViewService {

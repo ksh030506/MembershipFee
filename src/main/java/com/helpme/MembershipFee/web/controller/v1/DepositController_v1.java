@@ -7,6 +7,7 @@ import com.helpme.MembershipFee.domain.member.apireturn.nameReturn;
 import com.helpme.MembershipFee.service.deposit.DepositService;
 import com.helpme.MembershipFee.service.member.MemberServiceImpl;
 import com.helpme.MembershipFee.web.dto.DepositSaveRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
 public class DepositController_v1 {
@@ -28,6 +30,7 @@ public class DepositController_v1 {
     private MemberServiceImpl memberService;
 
     //입금 엔트포인트
+    @ResponseBody
     @PostMapping("/adddeposit")
     public Map<String, String> AddDeposit(@RequestBody DepositSaveRequestDto depositSaveRequestDto, HttpServletRequest req){
         //Json으로 보내기 위해 사용
@@ -42,7 +45,7 @@ public class DepositController_v1 {
         return map;
     }
 
-    //단순 이름 조회 엔트포인트
+    //모든 회원 이름 가져오기 엔드포인트
     @ResponseBody
     @GetMapping("/pullusername")
     public List<nameReturn> PullUserName(HttpServletRequest req) throws Exception {
@@ -59,7 +62,7 @@ public class DepositController_v1 {
     }
 
 
-    //deposit 날짜 조회 엔트포인트
+    //날짜 조회 엔트포인트
     @ResponseBody
     @PostMapping("/createdate")
     public List<DepositDateReturn> findByCreateDateBetween(HttpServletRequest req, @RequestParam("start")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start, @RequestParam("end")@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) throws Exception {

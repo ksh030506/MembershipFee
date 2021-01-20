@@ -1,8 +1,8 @@
 package com.helpme.MembershipFee.web.controller.v1;
 
 import com.helpme.MembershipFee.common.JwtUtil;
-import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 @Controller
 public class ExcelDownloadController {
