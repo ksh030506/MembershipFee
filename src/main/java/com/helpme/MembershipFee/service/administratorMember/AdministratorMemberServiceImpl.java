@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class AdministratorMemberServiceImpl implements AdministratorMemberService{
+public class AdministratorMemberServiceImpl implements AdministratorMemberService {
 
     @Autowired
     private AdministratorMemberRepository administratorMemberRepository;
