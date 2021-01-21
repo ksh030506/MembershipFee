@@ -1,4 +1,4 @@
-package com.helpme.MembershipFee.common;
+package com.helpme.MembershipFee.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

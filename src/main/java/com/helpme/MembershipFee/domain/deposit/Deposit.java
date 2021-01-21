@@ -1,6 +1,6 @@
 package com.helpme.MembershipFee.domain.deposit;
 
-import com.helpme.MembershipFee.common.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.BaseTimeEntity;
 import com.helpme.MembershipFee.domain.member.Member;
 import lombok.*;
 

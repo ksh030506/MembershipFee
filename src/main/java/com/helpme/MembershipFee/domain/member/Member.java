@@ -1,7 +1,7 @@
 package com.helpme.MembershipFee.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.helpme.MembershipFee.common.BaseTimeEntity;
+import com.helpme.MembershipFee.domain.BaseTimeEntity;
 import com.helpme.MembershipFee.domain.administratorMember.AdministratorMember;
 import lombok.*;
 
